@@ -14,7 +14,7 @@ env: # 共通環境變數
   RUBY_VERSION: '3.1.0'
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  spaider_afw:
+  spaider_afu:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

@@ -8,7 +8,10 @@ if !Dir.exist?("./public")
 end
 
 
-toolong=["（含文獻 Reference，原文標題：The Key Elements of Gamification in Corporate Training - The Delphi Method）"]
+toolong=[
+    "（含文獻 Reference，原文標題：The Key Elements of Gamification in Corporate Training - The Delphi Method）",
+    "：在Hahow的《教學的技術－線上課程》，與PressPlay「教學的技術12堂案例課」、大大學院「如何成為超級好講師」"
+]
 
 xml.xpath("//url/loc").each do |url|
     afuurl = url.text
