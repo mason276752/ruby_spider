@@ -25,10 +25,10 @@ jobs:
           ruby-version: ${{ env.RUBY_VERSION }}
           bundler-cache: true
       - name: Run index.rb
-        run: ruby index.rb
+        run: bundle exec ruby index.rb
       - name: Save to branch
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
-          publish_branch: ofac
+          publish_branch: afu
