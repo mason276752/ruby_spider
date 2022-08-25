@@ -1,0 +1,11 @@
+{
+  "name": "rubyspider",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:Louis0723/ruby_spider.git",
+  "author": "Louis_0723 <lursun@cybavo.com>",
+  "license": "MIT",
+  "dependencies": {
+    "http-server": "^14.1.1"
+  }
+}

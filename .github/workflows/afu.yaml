@@ -30,6 +30,15 @@ jobs:
           bundler-cache: true
       - name: Run afu.rb
         run: bundle exec ruby afu.rb
+      - name: Set up Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - name: Create Index HTML
+        run: |
+          yarn http-server &
+          sleep 5
+          bundle exec ruby http-server.rb
       - name: Save to branch
         uses: peaceiris/actions-gh-pages@v3
         with:
