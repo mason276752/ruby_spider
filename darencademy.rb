@@ -14,6 +14,7 @@ toolong=[
 
 xml.xpath("//url/loc").each do |url|
     darencademyUrl = url.text
+    puts darencademyUrl
     if(darencademyUrl.include? "https://www.darencademy.com/article/view/id")
         pageNumber = /\d+$/.match(darencademyUrl)
         page = Nokogiri::HTML(URI.open(darencademyUrl))
@@ -25,11 +26,12 @@ xml.xpath("//url/loc").each do |url|
                 title = title.sub(str,"")
             end
         end
-        author = page.xpath("//span[@class='author']")
-        dirname = author.text.gsub("/", "+")
-        if !Dir.exist?("./public/#{dirname}") && dirname != ""
-            Dir.mkdir("./public/#{dirname}")
-        end
-        File.write("./public/#{dirname}/#{pageNumber}-#{title}.html", body)
+        categories = page.xpath("//div[@class='content_meta']/span").each do |categorie|
+            dirname = categorie.text.gsub("/", "+")
+            if !Dir.exist?("./public/#{dirname}") && dirname != ""
+                Dir.mkdir("./public/#{dirname}")
+            end
+            File.write("./public/#{dirname}/#{pageNumber}-#{title}.html", body)
+        do
     end 
 end
