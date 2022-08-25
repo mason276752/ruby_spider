@@ -32,6 +32,6 @@ xml.xpath("//url/loc").each do |url|
                 Dir.mkdir("./public/#{dirname}")
             end
             File.write("./public/#{dirname}/#{pageNumber}-#{title}.html", body)
-        do
+        end
     end 
 end

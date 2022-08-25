@@ -16,7 +16,7 @@ toolong=[
 xml.xpath("//url/loc").each do |url|
     afuUrl = url.text
     puts afuUrl
-    if(newsvegUrl.include? "https://afu.tw/")
+    if(afuUrl.include? "https://afu.tw/")
         page_number = /\d+$/.match(afuUrl)
         page = Nokogiri::HTML(URI.open(afuUrl))
         title = page.xpath("//title").text.gsub("/", "+")
