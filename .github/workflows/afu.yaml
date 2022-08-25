@@ -28,7 +28,7 @@ jobs:
         with: # 預先動作的額外設定，這邊是設定 Ruby 版本
           ruby-version: ${{ env.RUBY_VERSION }}
           bundler-cache: true
-      - name: Run Afu.rb
+      - name: Run afu.rb
         run: bundle exec ruby afu.rb
       - name: Save to branch
         uses: peaceiris/actions-gh-pages@v3
