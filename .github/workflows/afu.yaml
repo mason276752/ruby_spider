@@ -11,7 +11,7 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 env: # 共通環境變數
-  RUBY_VERSION: '2.6.8'
+  RUBY_VERSION: '3.1.0'
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   spaider_afw:
