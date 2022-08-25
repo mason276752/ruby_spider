@@ -6,7 +6,7 @@ on:
   push:
     branches: [ main ]
     paths:
-      - './newsveg.rb'
+      - 'newsveg.rb'
   pull_request:
     branches: [ main ]
   schedule:

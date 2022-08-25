@@ -6,7 +6,7 @@ on:
   push:
     branches: [ main ]
     paths:
-      - './darencademy.rb'
+      - 'darencademy.rb'
   pull_request:
     branches: [ main ]
   schedule:

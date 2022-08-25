@@ -6,7 +6,7 @@ on:
   push:
     branches: [ main ]
     paths:
-      - './afu.rb'
+      - 'afu.rb'
   pull_request:
     branches: [ main ]
   schedule:
