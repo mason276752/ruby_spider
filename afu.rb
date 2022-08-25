@@ -17,6 +17,7 @@ xml.xpath("//url/loc").each do |url|
     afuUrl = url.text
     puts afuUrl
     if(afuUrl.include? "https://afu.tw/")
+        # meta
         page_number = /\d+$/.match(afuUrl)
         page = Nokogiri::HTML(URI.open(afuUrl))
         title = page.xpath("//title").text.gsub("/", "+")
@@ -28,6 +29,9 @@ xml.xpath("//url/loc").each do |url|
             end
         end
 
+        # author
+
+        # categories
         categories = page.xpath("//ul[@class='post-categories']/li").each do |categorie|
             dirname = categorie.text.gsub("/", "+")
             if !Dir.exist?("./public/#{dirname}") && dirname != ""
