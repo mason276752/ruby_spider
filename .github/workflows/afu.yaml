@@ -1,0 +1,39 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Fetch Data
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  push:
+    branches: [ main ]
+    paths:
+      - '.github/workflows/OFAC.yaml'
+  pull_request:
+    branches: [ main ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+env: # 共通環境變數
+  RUBY_VERSION: '3.1.0'
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  spaider_afw:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2 # 預先做成腳本的動作，不需要自己下命令
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with: # 預先動作的額外設定，這邊是設定 Ruby 版本
+          ruby-version: ${{ env.RUBY_VERSION }}
+          bundler-cache: true
+      - name: bundle install
+        run: bundle install --jobs 4 --retry 3
+      - name: Run index.rb
+        run: ruby index.rb
+      - name: Save to branch
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
+          publish_branch: ofac
