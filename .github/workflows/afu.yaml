@@ -1,21 +1,17 @@
-# This is a basic workflow to help you get started with Actions
-
-name: Fetch Data
+name: Afu Fetch
 
 # Controls when the workflow will run
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
   push:
     branches: [ main ]
-    paths:
-      - '.github/workflows/OFAC.yaml'
   pull_request:
     branches: [ main ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 env: # 共通環境變數
-  RUBY_VERSION: '2.7.6'
+  RUBY_VERSION: '2.6.8'
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   spaider_afw:
