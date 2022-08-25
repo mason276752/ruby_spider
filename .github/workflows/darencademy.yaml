@@ -1,4 +1,4 @@
-name: Afu Fetch
+name: Darencademy Fetch
 
 # Controls when the workflow will run
 on:
@@ -6,7 +6,7 @@ on:
   push:
     branches: [ main ]
     paths:
-      - './afu.rb'
+      - './darencademy.rb'
   pull_request:
     branches: [ main ]
   schedule:
@@ -18,7 +18,7 @@ env: # 共通環境變數
   RUBY_VERSION: '3.1.0'
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  spaider_afu:
+  spaider_darencademy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -28,11 +28,11 @@ jobs:
         with: # 預先動作的額外設定，這邊是設定 Ruby 版本
           ruby-version: ${{ env.RUBY_VERSION }}
           bundler-cache: true
-      - name: Run Afu.rb
-        run: bundle exec ruby afu.rb
+      - name: Run Darencademy.rb
+        run: bundle exec ruby darencademy.rb
       - name: Save to branch
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
-          publish_branch: afu
+          publish_branch: darencademy

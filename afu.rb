@@ -19,7 +19,7 @@ xml.xpath("//url/loc").each do |url|
     
     page_number = /\d+$/.match(afuurl)
     page = Nokogiri::HTML(URI.open(afuurl))
-    title = page.xpath("//title").text.gsub("/","+")
+    title = page.xpath("//title").text.gsub("/", "+")
     body = page.xpath("//div[@class='the_content_wrapper']")
 
     toolong.each do |str|
@@ -29,7 +29,7 @@ xml.xpath("//url/loc").each do |url|
     end
 
     categories = page.xpath("//ul[@class='post-categories']/li").each do |categorie|
-        dirname = categorie.text.gsub("/","+")
+        dirname = categorie.text.gsub("/", "+")
         if !Dir.exist?("./public/#{dirname}") && dirname != ""
             Dir.mkdir("./public/#{dirname}")
         end
