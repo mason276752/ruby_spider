@@ -16,7 +16,7 @@ env: # 共通環境變數
   RUBY_VERSION: '3.1.0'
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  spaider_afu:
+  spaider_githubpage:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -26,7 +26,7 @@ jobs:
         with: # 預先動作的額外設定，這邊是設定 Ruby 版本
           ruby-version: ${{ env.RUBY_VERSION }}
           bundler-cache: true
-      - name: Run afu.rb
+      - name: Run afu.rb darencademy.rb newsveg.rb
         run: |
           bundle exec ruby afu.rb &
           bundle exec ruby darencademy.rb &
@@ -39,14 +39,13 @@ jobs:
       - run: yarn
       - name: Create Github Page Index HTML
         run: |
-          cd public
-          node ../index.js &
-          cd ..
+          mv ./public ./ruby_spider
+          node ./index.js &
           sleep 5
           bundle exec ruby http-server.rb
       - name: Save to branch
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./public
+          publish_dir: ./ruby_spider
           publish_branch: gh-page
