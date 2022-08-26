@@ -15,7 +15,6 @@ toolong=[
 
 xml.xpath("//url/loc").each do |url|
     darencademyUrl = url.text
-    puts darencademyUrl
     if(darencademyUrl.include? "https://www.darencademy.com/article/view/id")
         # meta
         pageNumber = /\d+$/.match(darencademyUrl)
@@ -25,7 +24,7 @@ xml.xpath("//url/loc").each do |url|
 
         toolong.each do |str|
             if title.include? str
-                title = title.sub(str,"")
+                title = title.gsub(str,"")
             end
         end
 
@@ -33,7 +32,7 @@ xml.xpath("//url/loc").each do |url|
         author = page.xpath("//span[@class='author']").text.gsub("/", "+")
 
         # categories
-        categories = page.xpath("//div[@class='content_meta']/span").each do |categorie|
+        categories = page.xpath("//div[@class='content_meta']/span[@class='category']").each do |categorie|
             dirname = categorie.text.gsub("/", "+")
             if !Dir.exist?("./public/#{dirname}") && dirname != ""
                 Dir.mkdir("./public/#{dirname}")
