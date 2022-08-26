@@ -7,7 +7,7 @@ app.use(morgan('short'));
 // Serve URLs like /ftp/thing as public/ftp/thing
 // The express.static serves the file contents
 // The serveIndex is this module serving the directory
-app.use('/', serveIndex('./public', { 'icons': true }), express.static('./public'))
+app.use('/', serveIndex('./', { 'icons': true }), express.static('./'))
 
 // Listen
 app.listen(8080)
