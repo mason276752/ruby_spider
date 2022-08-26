@@ -34,7 +34,7 @@ xml.xpath("//url/loc").each do |url|
             author = page.xpath("//li[@itemprop='author']/a/span")[1].text.strip.gsub("/", "+")
         rescue => exception
             author = ""
-        else
+        end
 
         # categories
         categories = page.xpath("//div[contains(@class,'singlepost-tag-list')]/div/h2/a").each do |categorie|
