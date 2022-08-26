@@ -39,10 +39,10 @@ jobs:
       - run: yarn
       - name: Create Github Page Index HTML
         run: |
-          mv ./public ./ruby_spider
           node ./index.js &
           sleep 5
           bundle exec ruby http-server.rb
+          mv ./public ./ruby_spider
       - name: Save to branch
         uses: peaceiris/actions-gh-pages@v3
         with:
