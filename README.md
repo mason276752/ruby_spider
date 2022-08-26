@@ -8,3 +8,4 @@
 | 李柏鋒擴大機 | https://www.buffettism88.com/sitemap.xml                 |      |
 | 綠角財經筆記 | http://greenhornfinancefootnote.blogspot.com/sitemap.xml |      |
 | 爆文學院     | https://poword.tw/post-sitemap.xml                       |      |
+| Zen大        | https://zen1976.com/sitemap.xml                          |      |

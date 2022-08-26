@@ -12,11 +12,11 @@ toolong=[
 def decode(path)
     xml = Nokogiri::HTML(URI.open(@httpserverUrl+path))
     puts CGI.unescape(path)
-    if !Dir.exist?("./public"+CGI.unescape(path))
-        Dir.mkdir("./public"+CGI.unescape(path))
+    if !Dir.exist?("./"+CGI.unescape(path))
+        Dir.mkdir("./"+CGI.unescape(path))
     end
     
-    File.write("./public#{CGI.unescape(path)}/index.html", xml.to_html)
+    File.write("./#{CGI.unescape(path)}/index.html", xml.to_html)
     
     xml.xpath("//a[contains(@class,'icon-directory')]").each do |a|
         pathdeep = a["href"]
@@ -25,4 +25,4 @@ def decode(path)
         end
     end
 end
-decode("/")
+decode("/ruby_spider")
