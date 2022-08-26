@@ -9,7 +9,8 @@ end
 
 
 toolong=[
-    
+    "#",
+    "?"
 ]
 
 xml.xpath("//url/loc").each do |url|
@@ -24,7 +25,7 @@ xml.xpath("//url/loc").each do |url|
 
         toolong.each do |str|
             if title.include? str
-                title = title.sub(str,"")
+                title = title.gsub(str,"")
             end
         end
 

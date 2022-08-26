@@ -9,7 +9,8 @@ end
 
 
 toolong=[
-    
+    "#",
+    "?"
 ]
 
 xml.xpath("//url/loc").each do |url|
