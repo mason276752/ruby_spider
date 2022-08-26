@@ -30,6 +30,18 @@ jobs:
           bundler-cache: true
       - name: Run newsveg.rb
         run: bundle exec ruby newsveg.rb
+      - name: Set up Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - run: yarn
+      - name: Create Index HTML
+        run: |
+          cd public
+          node index.js &
+          cd ..
+          sleep 5
+          bundle exec ruby http-server.rb
       - name: Save to branch
         uses: peaceiris/actions-gh-pages@v3
         with:
