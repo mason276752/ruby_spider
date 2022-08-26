@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html>
+  <head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta charset="utf-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>listing directory /public/darencademy/布大叔談戀愛</title>
+    <style>* {
+  margin: 0;
+  padding: 0;
+  outline: 0;
+}
+
+body {
+  padding: 80px 100px;
+  font: 13px "Helvetica Neue", "Lucida Grande", "Arial";
+  background: #ECE9E9 -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fff), to(#ECE9E9));
+  background: #ECE9E9 -moz-linear-gradient(top, #fff, #ECE9E9);
+  background-repeat: no-repeat;
+  color: #555;
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3 {
+  font-size: 22px;
+  color: #343434;
+}
+h1 em, h2 em {
+  padding: 0 5px;
+  font-weight: normal;
+}
+h1 {
+  font-size: 60px;
+}
+h2 {
+  margin-top: 10px;
+}
+h3 {
+  margin: 5px 0 10px 0;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #eee;
+  font-size: 18px;
+}
+ul li {
+  list-style: none;
+}
+ul li:hover {
+  cursor: pointer;
+  color: #2e2e2e;
+}
+ul li .path {
+  padding-left: 5px;
+  font-weight: bold;
+}
+ul li .line {
+  padding-right: 5px;
+  font-style: italic;
+}
+ul li:first-child .path {
+  padding-left: 0;
+}
+p {
+  line-height: 1.5;
+}
+a {
+  color: #555;
+  text-decoration: none;
+}
+a:hover {
+  color: #303030;
+}
+#stacktrace {
+  margin-top: 15px;
+}
+.directory h1 {
+  margin-bottom: 15px;
+  font-size: 18px;
+}
+ul#files {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+ul#files li {
+  float: left;
+  width: 30%;
+  line-height: 25px;
+  margin: 1px;
+}
+ul#files li a {
+  display: block;
+  height: 25px;
+  border: 1px solid transparent;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+ul#files li a:focus,
+ul#files li a:hover {
+  background: rgba(255,255,255,0.65);
+  border: 1px solid #ececec;
+}
+ul#files li a.highlight {
+  -webkit-transition: background .4s ease-in-out;
+  background: #ffff4f;
+  border-color: #E9DC51;
+}
+#search {
+  display: block;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 90px;
+  -webkit-transition: width ease 0.2s, opacity ease 0.4s;
+  -moz-transition: width ease 0.2s, opacity ease 0.4s;
+  -webkit-border-radius: 32px;
+  -moz-border-radius: 32px;
+  -webkit-box-shadow: inset 0px 0px 3px rgba(0, 0, 0, 0.25), inset 0px 1px 3px rgba(0, 0, 0, 0.7), 0px 1px 0px rgba(255, 255, 255, 0.03);
+  -moz-box-shadow: inset 0px 0px 3px rgba(0, 0, 0, 0.25), inset 0px 1px 3px rgba(0, 0, 0, 0.7), 0px 1px 0px rgba(255, 255, 255, 0.03);
+  -webkit-font-smoothing: antialiased;
+  text-align: left;
+  font: 13px "Helvetica Neue", Arial, sans-serif;
+  padding: 4px 10px;
+  border: none;
+  background: transparent;
+  margin-bottom: 0;
+  outline: none;
+  opacity: 0.7;
+  color: #888;
+}
+#search:focus {
+  width: 120px;
+  opacity: 1.0; 
+}
+
+/*views*/
+#files span {
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-indent: 10px;
+}
+#files .name {
+  background-repeat: no-repeat;
+}
+#files .icon .name {
+  text-indent: 28px;
+}
+
+/*tiles*/
+.view-tiles .name {
+  width: 100%;
+  background-position: 8px 5px;
+}
+.view-tiles .size,
+.view-tiles .date {
+  display: none;
+}
+
+/*details*/
+ul#files.view-details li {
+  float: none;
+  display: block;
+  width: 90%;
+}
+ul#files.view-details li.header {
+  height: 25px;
+  background: #000;
+  color: #fff;
+  font-weight: bold;
+}
+.view-details .header {
+  border-radius: 5px;
+}
+.view-details .name {
+  width: 60%;
+  background-position: 8px 5px;
+}
+.view-details .size {
+  width: 10%;
+}
+.view-details .date {
+  width: 30%;
+}
+.view-details .size,
+.view-details .date {
+  text-align: right;
+  direction: rtl;
+}
+
+/*mobile*/
+@media (max-width: 768px) {
+  body {
+    font-size: 13px;
+    line-height: 16px;
+    padding: 0;
+  }
+  #search {
+    position: static;
+    width: 100%;
+    font-size: 2em;
+    line-height: 1.8em;
+    text-indent: 10px;
+    border: 0;
+    border-radius: 0;
+    padding: 10px 0;
+    margin: 0;
+  }
+  #search:focus {
+    width: 100%;
+    border: 0;
+    opacity: 1;
+  }
+  .directory h1 {
+    font-size: 2em;
+    line-height: 1.5em;
+    color: #fff;
+    background: #000;
+    padding: 15px 10px;
+    margin: 0;
+  }
+  ul#files {
+    border-top: 1px solid #cacaca;
+  }
+  ul#files li {
+    float: none;
+    width: auto !important;
+    display: block;
+    border-bottom: 1px solid #cacaca;
+    font-size: 2em;
+    line-height: 1.2em;
+    text-indent: 0;
+    margin: 0;
+  }
+  ul#files li:nth-child(odd) {
+    background: #e0e0e0;
+  }
+  ul#files li a {
+    height: auto;
+    border: 0;
+    border-radius: 0;
+    padding: 15px 10px;
+  }
+  ul#files li a:focus,
+  ul#files li a:hover {
+    border: 0;
+  }
+  #files .header,
+  #files .size,
+  #files .date {
+    display: none !important;
+  }
+  #files .name {
+    float: none;
+    display: inline-block;
+    width: 100%;
+    text-indent: 0;
+    background-position: 0 50%;
+  }
+  #files .icon .name {
+    text-indent: 41px;
+  }
+}
+#files .icon-directory .name {
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAABGdBTUEAALGPC/xhBQAAAWtQTFRFAAAA/PPQ9Nhc2q402qQ12qs2/PTX2pg12p81+/LM89NE9dto2q82+/fp2rM22qY39d6U+/bo2qo2/frx/vz32q812qs12qE279SU8c4w9NZP+/LK//367s9y7s925cp0/vzw9t92//342po2/vz25s1579B6+OSO2bQ0/v799NyT8tE79dld8Msm+OrC/vzx79KA2IYs7s6I9d6R4cJe9+OF/PLI/fry79OF/v30//328tWB89RJ8c9p8c0u9eCf//7+9txs6sts5Mdr+++5+u2z/vrv+/fq6cFz8dBs8tA57cpq+OaU9uGs27Y8//799NdX/PbY9uB89unJ//z14sNf+emh+emk+vDc+uys9+OL8dJy89NH+eic8tN5+OaV+OWR9N2n9dtl9t529+KF9+GB9Nue9NdU8tR/9t5y89qW9dpj89iO89eG/vvu2pQ12Y4z/vzy2Ict/vvv48dr/vzz4sNg///+2Igty3PqwQAAAAF0Uk5TAEDm2GYAAACtSURBVBjTY2AgA2iYlJWVhfohBPg0yx38y92dS0pKVOVBAqIi6sb2vsWWpfrFeTI8QAEhYQEta28nCwM1OVleZqCAmKCEkUdwYWmhQnFeOStQgL9cySqkNNDHVJGbiY0FKCCuYuYSGRsV5KgjxcXIARRQNncNj09JTgqw0ZbkZAcK5LuFJaRmZqfHeNnpSucDBQoiEtOycnIz4qI9bfUKQA6pKKqAgqIKQyK8BgAZ5yfODmnHrQAAAABJRU5ErkJggg==);
+}
+#files .icon-text-html .name {
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAHtSURBVDjLjZM9T9tQFIYpQ5eOMBKlW6eWIQipa8RfQKQghEAKqZgKFQgmFn5AWyVDCipVQZC2EqBWlEqdO2RCpAssQBRsx1+1ndix8wFvfW6wcUhQsfTI0j33PD7n+N4uAF2E+/S5RFwG/8Njl24/LyCIOI6j1+v1y0ajgU64cSSTybdBSVAwSMmmacKyLB/DMKBpGkRRZBJBEJBKpXyJl/yABLTBtm1Uq1X2JsrlMnRdhyRJTFCpVEAfSafTTUlQoFs1luxBAkoolUqQZbmtJTYTT/AoHInOfpcwtVtkwcSBgrkDGYph+60oisIq4Xm+VfB0+U/P0Lvj3NwPGfHPTcHMvoyFXwpe7UmQtAqTUCU0D1VVbwTPVk5jY19Fe3ZfQny7CE51WJDXqpjeEUHr45ki9rIqa4dmQiJfMLItGEs/FcQ2ucbRmdnSYy5vYWyLx/w3EaMfLmBaDpMQvuDJ65PY8Dpnz3wpYmLtApzcrIAqmfrEgdZH1grY/a36w6Xz0DKD8ES25/niYS6+wWE8mWfByY8cXmYEJFYLkHUHtVqNQcltAvoLD3v7o/FUHsNvzlnwxfsCEukC/ho3yUHaBN5Buo17Ojtyl+DqrnvQgUtfcC0ZcAdkUeA+ye7eMru9AUGIJPe4zh509UP/AAfNypi8oj/mAAAAAElFTkSuQmCC);
+}
+</style>
+    <script>
+      function $(id){
+        var el = 'string' == typeof id
+          ? document.getElementById(id)
+          : id;
+
+        el.on = function(event, fn){
+          if ('content loaded' == event) {
+            event = window.attachEvent ? "load" : "DOMContentLoaded";
+          }
+          el.addEventListener
+            ? el.addEventListener(event, fn, false)
+            : el.attachEvent("on" + event, fn);
+        };
+
+        el.all = function(selector){
+          return $(el.querySelectorAll(selector));
+        };
+
+        el.each = function(fn){
+          for (var i = 0, len = el.length; i < len; ++i) {
+            fn($(el[i]), i);
+          }
+        };
+
+        el.getClasses = function(){
+          return this.getAttribute('class').split(/\s+/);
+        };
+
+        el.addClass = function(name){
+          var classes = this.getAttribute('class');
+          el.setAttribute('class', classes
+            ? classes + ' ' + name
+            : name);
+        };
+
+        el.removeClass = function(name){
+          var classes = this.getClasses().filter(function(curr){
+            return curr != name;
+          });
+          this.setAttribute('class', classes.join(' '));
+        };
+
+        return el;
+      }
+
+      function search() {
+        var str = $('search').value.toLowerCase();
+        var links = $('files').all('a');
+
+        links.each(function(link){
+          var text = link.textContent.toLowerCase();
+
+          if ('..' == text) return;
+          if (str.length && ~text.indexOf(str)) {
+            link.addClass('highlight');
+          } else {
+            link.removeClass('highlight');
+          }
+        });
+      }
+
+      $(window).on('content loaded', function(){
+        $('search').on('keyup', search);
+      });
+    </script>
+  </head>
+  <body class="directory">
+    <input id="search" type="text" placeholder="Search" autocomplete="off">
+    <div id="wrapper">
+      <h1>
+<a href="/">~</a> / <a href="/public">public</a> / <a href="/public/darencademy">darencademy</a> / <a href="/public/darencademy/%E5%B8%83%E5%A4%A7%E5%8F%94%E8%AB%87%E6%88%80%E6%84%9B">布大叔談戀愛</a>
+</h1>
+      <ul id="files" class="view-tiles">
+<li><a href="/public/darencademy" class="icon icon-directory" title=".."><span class="name">..</span><span class="size"></span><span class="date"></span></a></li>
+<li><a href="/public/darencademy/%E5%B8%83%E5%A4%A7%E5%8F%94%E8%AB%87%E6%88%80%E6%84%9B/12331-%E5%A7%9A%E8%A9%A9%E8%B1%AA%20Bryan%20Yao-%E4%B8%80%E5%B9%B4%E9%81%8E%E5%8E%BB%EF%BC%8C%E4%BD%A0%E7%9A%84%E8%BE%9B%E5%8B%9E%E8%AE%93%E4%BA%BA%E6%9C%89%E6%84%9F%E5%97%8E%EF%BC%9F.html" class="icon icon icon-html icon-text-html" title="12331-姚詩豪 Bryan Yao-一年過去，你的辛勞讓人有感嗎？.html"><span class="name">12331-姚詩豪 Bryan Yao-一年過去，你的辛勞讓人有感嗎？.html</span><span class="size">9069</span><span class="date">8/26/2022 3:27:35 PM</span></a></li>
+<li><a href="/public/darencademy/%E5%B8%83%E5%A4%A7%E5%8F%94%E8%AB%87%E6%88%80%E6%84%9B/15354-%E5%BC%B5%E5%9C%8B%E6%B4%8B%20Joe%20Chang-%E7%94%A8%E9%80%99%E4%B8%83%E5%80%8B%E6%AD%A5%E9%A9%9F%EF%BC%8C%E7%95%AB%E5%87%BA%E4%BD%A0%E7%9A%84%E8%81%B7%E5%A0%B4%E5%8D%87%E9%81%B7%E8%B7%AF%E7%B7%9A%E5%9C%96.html" class="icon icon icon-html icon-text-html" title="15354-張國洋 Joe Chang-用這七個步驟，畫出你的職場升遷路線圖.html"><span class="name">15354-張國洋 Joe Chang-用這七個步驟，畫出你的職場升遷路線圖.html</span><span class="size">6182</span><span class="date">8/26/2022 3:29:30 PM</span></a></li>
+<li><a href="/public/darencademy/%E5%B8%83%E5%A4%A7%E5%8F%94%E8%AB%87%E6%88%80%E6%84%9B/15773-%E5%BC%B5%E5%9C%8B%E6%B4%8B%20Joe%20Chang-%E8%81%B7%E5%A0%B4%E6%96%B0%E9%AE%AE%E4%BA%BA%E8%A9%B2%E7%9F%A5%E9%81%93%E7%9A%84%E4%BA%94%E9%A0%85%E6%BA%9D%E9%80%9A%E7%9F%A5%E8%AD%98.html" class="icon icon icon-html icon-text-html" title="15773-張國洋 Joe Chang-職場新鮮人該知道的五項溝通知識.html"><span class="name">15773-張國洋 Joe Chang-職場新鮮人該知道的五項溝通知識.html</span><span class="size">10729</span><span class="date">8/26/2022 3:29:57 PM</span></a></li>
+<li><a href="/public/darencademy/%E5%B8%83%E5%A4%A7%E5%8F%94%E8%AB%87%E6%88%80%E6%84%9B/16425-%E5%BC%B5%E5%9C%8B%E6%B4%8B%20Joe%20Chang-%E8%80%81%E5%83%91%E8%A7%80%E9%BB%9E%EF%BC%9A%E7%82%BA%E4%BD%95%E7%94%B7%E4%BA%BA%E8%BF%BD%E5%88%B0%E4%BD%A0%E5%BE%8C%EF%BC%8C%E5%BE%80%E5%BE%80%E5%B0%B1%E6%9C%83%E8%AE%8A%E5%BE%97%E5%86%B7%E6%B7%A1%EF%BC%9F.html" class="icon icon icon-html icon-text-html" title="16425-張國洋 Joe Chang-老僑觀點：為何男人追到你後，往往就會變得冷淡？.html"><span class="name">16425-張國洋 Joe Chang-老僑觀點：為何男人追到你後，往往就會變得冷淡？.html</span><span class="size">4725</span><span class="date">8/26/2022 3:31:39 PM</span></a></li>
+<li><a href="/public/darencademy/%E5%B8%83%E5%A4%A7%E5%8F%94%E8%AB%87%E6%88%80%E6%84%9B/16520-%E5%A7%9A%E8%A9%A9%E8%B1%AA%20Bryan%20Yao-%E6%88%91%E7%9C%8B%E9%81%8E%E6%9C%80%E5%BF%AB%E7%8B%A0%E6%BA%96%E7%9A%84%E5%A9%9A%E7%A6%AE%E7%AD%96%E5%8A%83%EF%BC%81%E8%87%AA%E5%B7%B1%E5%81%9A%E4%B8%80%E5%A0%B4%E9%AB%98%E6%95%88%E7%8E%87%E7%B5%90%E5%A9%9A%E5%B0%88%E6%A1%88.html" class="icon icon icon-html icon-text-html" title="16520-姚詩豪 Bryan Yao-我看過最快狠準的婚禮策劃！自己做一場高效率結婚專案.html"><span class="name">16520-姚詩豪 Bryan Yao-我看過最快狠準的婚禮策劃！自己做一場高效率結婚專案.html</span><span class="size">6844</span><span class="date">8/26/2022 3:33:18 PM</span></a></li>
+<li><a href="/public/darencademy/%E5%B8%83%E5%A4%A7%E5%8F%94%E8%AB%87%E6%88%80%E6%84%9B/16524-%E5%A7%9A%E8%A9%A9%E8%B1%AA%20Bryan%20Yao-%E8%B7%9F%E5%A5%B3%E7%94%9F%E4%BA%92%E5%8B%95%E6%9C%89%E9%9A%9C%E7%A4%99%EF%BC%9F%E4%B9%9F%E8%A8%B1%E4%BD%A0%E8%A9%B2%E8%A9%A6%E8%A9%A6Tango%EF%BC%81.html" class="icon icon icon-html icon-text-html" title="16524-姚詩豪 Bryan Yao-跟女生互動有障礙？也許你該試試Tango！.html"><span class="name">16524-姚詩豪 Bryan Yao-跟女生互動有障礙？也許你該試試Tango！.html</span><span class="size">7588</span><span class="date">8/26/2022 3:33:22 PM</span></a></li>
+<li><a href="/public/darencademy/%E5%B8%83%E5%A4%A7%E5%8F%94%E8%AB%87%E6%88%80%E6%84%9B/16547-%E5%BC%B5%E5%9C%8B%E6%B4%8B%20Joe%20Chang-Kobo%20Aura%20One%E9%96%8B%E7%AE%B1%E5%88%86%E4%BA%AB%EF%BC%8C%E4%BB%A5%E5%8F%8A%E4%B8%80%E8%88%AC%E4%BA%BA%E8%A9%B2%E5%A6%82%E4%BD%95%E9%81%B8%E8%B3%BC%E9%9B%BB%E5%AD%90%E7%B4%99%E9%96%B1%E8%AE%80%E5%99%A8.html" class="icon icon icon-html icon-text-html" title="16547-張國洋 Joe Chang-Kobo Aura One開箱分享，以及一般人該如何選購電子紙閱讀器.html"><span class="name">16547-張國洋 Joe Chang-Kobo Aura One開箱分享，以及一般人該如何選購電子紙閱讀器.html</span><span class="size">14641</span><span class="date">8/26/2022 3:33:45 PM</span></a></li>
+<li><a href="/public/darencademy/%E5%B8%83%E5%A4%A7%E5%8F%94%E8%AB%87%E6%88%80%E6%84%9B/16594-%E5%A7%9A%E8%A9%A9%E8%B1%AA%20Bryan%20Yao-%E5%AE%B9%E6%98%93%E6%89%93%E5%8B%95%E5%A5%B3%E6%80%A7%E8%8A%B3%E5%BF%83%E7%9A%84%E4%B8%89%E7%A8%AE%E8%81%B7%E6%A5%AD%20%E2%80%93%20%E4%BE%86%E8%87%AABryan%E7%9A%84%E8%87%A5%E5%BA%95%E8%A7%80%E5%AF%9F.html" class="icon icon icon-html icon-text-html" title="16594-姚詩豪 Bryan Yao-容易打動女性芳心的三種職業 – 來自Bryan的臥底觀察.html"><span class="name">16594-姚詩豪 Bryan Yao-容易打動女性芳心的三種職業 – 來自Bryan的臥底觀察.html</span><span class="size">12418</span><span class="date">8/26/2022 3:34:36 PM</span></a></li>
+<li><a href="/public/darencademy/%E5%B8%83%E5%A4%A7%E5%8F%94%E8%AB%87%E6%88%80%E6%84%9B/16625-%E7%B6%A0%E8%A7%92-%E6%8A%95%E8%B3%87%E4%B8%8D%E9%9C%80%E8%A6%81%E7%B5%95%E9%A0%82%E8%81%B0%E6%98%8E%EF%BC%8C%E5%8F%AA%E8%A6%81%E5%9F%BA%E6%9C%AC%E9%82%8F%E8%BC%AF(Investing%20is%20NOT%20Rocket%20Science).html" class="icon icon icon-html icon-text-html" title="16625-綠角-投資不需要絕頂聰明，只要基本邏輯(Investing is NOT Rocket Science).html"><span class="name">16625-綠角-投資不需要絕頂聰明，只要基本邏輯(Investing is NOT Rocket Science).html</span><span class="size">5159</span><span class="date">8/26/2022 3:35:11 PM</span></a></li>
+<li><a href="/public/darencademy/%E5%B8%83%E5%A4%A7%E5%8F%94%E8%AB%87%E6%88%80%E6%84%9B/16637-%E5%A4%A7%E9%AD%94%E7%8E%8B-%E5%A5%B3%E7%94%9F%E6%9C%83%E5%96%9C%E6%AD%A1%E7%85%A7%E9%A1%A7%E5%A5%B9%E7%9A%84%E4%BA%BA%EF%BC%8C%E9%82%84%E6%98%AF%E5%A5%B9%E7%85%A7%E9%A1%A7%E7%9A%84%E4%BA%BA%EF%BC%9F.html" class="icon icon icon-html icon-text-html" title="16637-大魔王-女生會喜歡照顧她的人，還是她照顧的人？.html"><span class="name">16637-大魔王-女生會喜歡照顧她的人，還是她照顧的人？.html</span><span class="size">4120</span><span class="date">8/26/2022 3:35:26 PM</span></a></li>
+<li><a href="/public/darencademy/%E5%B8%83%E5%A4%A7%E5%8F%94%E8%AB%87%E6%88%80%E6%84%9B/16717-%E9%BB%83%E5%96%AC%E4%BC%8A%20Joy%20Huang-%E5%81%9A%E7%B0%A1%E5%A0%B1%E5%89%8D%EF%BC%8C%E8%AB%8B%E5%85%88%E8%80%83%E6%85%AE%E3%80%8C%E8%81%BD%E7%9C%BE%E3%80%8D%E6%98%AF%E8%AA%B0%EF%BC%81%E5%9C%A8%E5%B0%8F%E5%90%83%E5%BA%97%E6%9C%8D%E5%8B%99%E7%94%9F%E8%BA%AB%E4%B8%8A%EF%BC%8C%E6%88%91%E7%9C%8B%E8%A6%8B%E7%9A%84%E7%B0%A1%E5%A0%B1%E6%88%90%E5%8A%9F%E9%97%9C%E9%8D%B5.html" class="icon icon icon-html icon-text-html" title="16717-黃喬伊 Joy Huang-做簡報前，請先考慮「聽眾」是誰！在小吃店服務生身上，我看見的簡報成功關鍵.html"><span class="name">16717-黃喬伊 Joy Huang-做簡報前，請先考慮「聽眾」是誰！在小吃店服務生身上，我看見的簡報成功關鍵.html</span><span class="size">6584</span><span class="date">8/26/2022 3:36:51 PM</span></a></li>
+<li><a href="/public/darencademy/%E5%B8%83%E5%A4%A7%E5%8F%94%E8%AB%87%E6%88%80%E6%84%9B/16754-%E5%BC%B5%E5%9C%8B%E6%B4%8B%20Joe%20Chang-%E4%BA%BA%E7%94%9F%E7%A9%A9%E7%95%B6%E7%9A%84%E4%BA%A4%E5%8F%8B%E7%AD%96%E7%95%A5%EF%BC%8C%E4%B8%8D%E5%A4%96%E4%B9%8E%E5%B0%B1%E6%98%AF%E8%A6%AA%E8%BF%91%E3%80%8C%E8%9E%9E%E8%9F%BB%E3%80%8D%E4%BD%86%E9%81%A0%E9%9B%A2%E3%80%8C%E8%9A%B1%E8%9C%A2%E3%80%8D.html" class="icon icon icon-html icon-text-html" title="16754-張國洋 Joe Chang-人生穩當的交友策略，不外乎就是親近「螞蟻」但遠離「蚱蜢」.html"><span class="name">16754-張國洋 Joe Chang-人生穩當的交友策略，不外乎就是親近「螞蟻」但遠離「蚱蜢」.html</span><span class="size">8922</span><span class="date">8/26/2022 3:37:33 PM</span></a></li>
+<li><a href="/public/darencademy/%E5%B8%83%E5%A4%A7%E5%8F%94%E8%AB%87%E6%88%80%E6%84%9B/16804-%E9%BB%83%E5%96%AC%E4%BC%8A%20Joy%20Huang-%E4%BB%96%E4%BA%BA%E7%9A%84%E6%BA%9D%E9%80%9A%E7%9B%B2%E9%BB%9E%EF%BC%8C%E5%B0%B1%E6%98%AF%E4%BD%A0%E7%9A%84%E6%A9%9F%E6%9C%83%EF%BC%9A%E8%81%B7%E5%A0%B4%E4%B8%8A%E7%9A%84%E3%80%8C%E7%AC%AC%E4%BA%8C%E5%B1%A4%E6%80%9D%E8%80%83%E3%80%8D.html" class="icon icon icon-html icon-text-html" title="16804-黃喬伊 Joy Huang-他人的溝通盲點，就是你的機會：職場上的「第二層思考」.html"><span class="name">16804-黃喬伊 Joy Huang-他人的溝通盲點，就是你的機會：職場上的「第二層思考」.html</span><span class="size">11075</span><span class="date">8/26/2022 3:38:23 PM</span></a></li>
+<li><a href="/public/darencademy/%E5%B8%83%E5%A4%A7%E5%8F%94%E8%AB%87%E6%88%80%E6%84%9B/16852-%E9%BB%83%E5%96%AC%E4%BC%8A%20Joy%20Huang-%E8%AB%8B%E4%BD%A0%E4%B8%8D%E8%A6%81%E6%83%B3%E5%A4%A7%E8%B1%A1%EF%BC%9A%E4%BB%80%E9%BA%BC%E6%98%AF%E8%81%B7%E5%A0%B4%E7%9A%84%E7%B2%BE%E6%BA%96%E8%A1%A8%E9%81%94%EF%BC%9F%EF%BC%88%E4%B8%8A%EF%BC%89.html" class="icon icon icon-html icon-text-html" title="16852-黃喬伊 Joy Huang-請你不要想大象：什麼是職場的精準表達？（上）.html"><span class="name">16852-黃喬伊 Joy Huang-請你不要想大象：什麼是職場的精準表達？（上）.html</span><span class="size">11932</span><span class="date">8/26/2022 3:39:21 PM</span></a></li>
+<li><a href="/public/darencademy/%E5%B8%83%E5%A4%A7%E5%8F%94%E8%AB%87%E6%88%80%E6%84%9B/4314-%E5%BC%B5%E5%9C%8B%E6%B4%8B%20Joe%20Chang-%E9%97%9C%E6%96%BC%E5%8F%A5%E9%BB%9E%E9%80%99%E6%9D%B1%E8%A5%BF.html" class="icon icon icon-html icon-text-html" title="4314-張國洋 Joe Chang-關於句點這東西.html"><span class="name">4314-張國洋 Joe Chang-關於句點這東西.html</span><span class="size">8578</span><span class="date">8/26/2022 3:25:19 PM</span></a></li>
+<li><a href="/public/darencademy/%E5%B8%83%E5%A4%A7%E5%8F%94%E8%AB%87%E6%88%80%E6%84%9B/4580-%E5%BC%B5%E5%9C%8B%E6%B4%8B%20Joe%20Chang-Joe%E7%9A%84%E6%99%82%E9%96%93%E7%AE%A1%E7%90%86%E8%A1%9307%20-%20%E6%99%82%E9%96%93%E7%9A%84%E5%96%AE%E5%83%B9.html" class="icon icon icon-html icon-text-html" title="4580-張國洋 Joe Chang-Joe的時間管理術07 - 時間的單價.html"><span class="name">4580-張國洋 Joe Chang-Joe的時間管理術07 - 時間的單價.html</span><span class="size">8157</span><span class="date">8/26/2022 3:25:21 PM</span></a></li>
+<li><a href="/public/darencademy/%E5%B8%83%E5%A4%A7%E5%8F%94%E8%AB%87%E6%88%80%E6%84%9B/5244-%E5%A7%9A%E8%A9%A9%E8%B1%AA%20Bryan%20Yao-NIKE%2BGPS%E4%BD%BF%E7%94%A8%E5%BF%83%E5%BE%97.html" class="icon icon icon-html icon-text-html" title="5244-姚詩豪 Bryan Yao-NIKE+GPS使用心得.html"><span class="name">5244-姚詩豪 Bryan Yao-NIKE+GPS使用心得.html</span><span class="size">9725</span><span class="date">8/26/2022 3:25:32 PM</span></a></li>
+</ul>
+    </div>
+  </body>
+</html>

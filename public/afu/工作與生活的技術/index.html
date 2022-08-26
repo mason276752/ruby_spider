@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html>
+  <head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta charset="utf-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>listing directory /public/afu/工作與生活的技術</title>
+    <style>* {
+  margin: 0;
+  padding: 0;
+  outline: 0;
+}
+
+body {
+  padding: 80px 100px;
+  font: 13px "Helvetica Neue", "Lucida Grande", "Arial";
+  background: #ECE9E9 -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fff), to(#ECE9E9));
+  background: #ECE9E9 -moz-linear-gradient(top, #fff, #ECE9E9);
+  background-repeat: no-repeat;
+  color: #555;
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3 {
+  font-size: 22px;
+  color: #343434;
+}
+h1 em, h2 em {
+  padding: 0 5px;
+  font-weight: normal;
+}
+h1 {
+  font-size: 60px;
+}
+h2 {
+  margin-top: 10px;
+}
+h3 {
+  margin: 5px 0 10px 0;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #eee;
+  font-size: 18px;
+}
+ul li {
+  list-style: none;
+}
+ul li:hover {
+  cursor: pointer;
+  color: #2e2e2e;
+}
+ul li .path {
+  padding-left: 5px;
+  font-weight: bold;
+}
+ul li .line {
+  padding-right: 5px;
+  font-style: italic;
+}
+ul li:first-child .path {
+  padding-left: 0;
+}
+p {
+  line-height: 1.5;
+}
+a {
+  color: #555;
+  text-decoration: none;
+}
+a:hover {
+  color: #303030;
+}
+#stacktrace {
+  margin-top: 15px;
+}
+.directory h1 {
+  margin-bottom: 15px;
+  font-size: 18px;
+}
+ul#files {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+ul#files li {
+  float: left;
+  width: 30%;
+  line-height: 25px;
+  margin: 1px;
+}
+ul#files li a {
+  display: block;
+  height: 25px;
+  border: 1px solid transparent;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+ul#files li a:focus,
+ul#files li a:hover {
+  background: rgba(255,255,255,0.65);
+  border: 1px solid #ececec;
+}
+ul#files li a.highlight {
+  -webkit-transition: background .4s ease-in-out;
+  background: #ffff4f;
+  border-color: #E9DC51;
+}
+#search {
+  display: block;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 90px;
+  -webkit-transition: width ease 0.2s, opacity ease 0.4s;
+  -moz-transition: width ease 0.2s, opacity ease 0.4s;
+  -webkit-border-radius: 32px;
+  -moz-border-radius: 32px;
+  -webkit-box-shadow: inset 0px 0px 3px rgba(0, 0, 0, 0.25), inset 0px 1px 3px rgba(0, 0, 0, 0.7), 0px 1px 0px rgba(255, 255, 255, 0.03);
+  -moz-box-shadow: inset 0px 0px 3px rgba(0, 0, 0, 0.25), inset 0px 1px 3px rgba(0, 0, 0, 0.7), 0px 1px 0px rgba(255, 255, 255, 0.03);
+  -webkit-font-smoothing: antialiased;
+  text-align: left;
+  font: 13px "Helvetica Neue", Arial, sans-serif;
+  padding: 4px 10px;
+  border: none;
+  background: transparent;
+  margin-bottom: 0;
+  outline: none;
+  opacity: 0.7;
+  color: #888;
+}
+#search:focus {
+  width: 120px;
+  opacity: 1.0; 
+}
+
+/*views*/
+#files span {
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-indent: 10px;
+}
+#files .name {
+  background-repeat: no-repeat;
+}
+#files .icon .name {
+  text-indent: 28px;
+}
+
+/*tiles*/
+.view-tiles .name {
+  width: 100%;
+  background-position: 8px 5px;
+}
+.view-tiles .size,
+.view-tiles .date {
+  display: none;
+}
+
+/*details*/
+ul#files.view-details li {
+  float: none;
+  display: block;
+  width: 90%;
+}
+ul#files.view-details li.header {
+  height: 25px;
+  background: #000;
+  color: #fff;
+  font-weight: bold;
+}
+.view-details .header {
+  border-radius: 5px;
+}
+.view-details .name {
+  width: 60%;
+  background-position: 8px 5px;
+}
+.view-details .size {
+  width: 10%;
+}
+.view-details .date {
+  width: 30%;
+}
+.view-details .size,
+.view-details .date {
+  text-align: right;
+  direction: rtl;
+}
+
+/*mobile*/
+@media (max-width: 768px) {
+  body {
+    font-size: 13px;
+    line-height: 16px;
+    padding: 0;
+  }
+  #search {
+    position: static;
+    width: 100%;
+    font-size: 2em;
+    line-height: 1.8em;
+    text-indent: 10px;
+    border: 0;
+    border-radius: 0;
+    padding: 10px 0;
+    margin: 0;
+  }
+  #search:focus {
+    width: 100%;
+    border: 0;
+    opacity: 1;
+  }
+  .directory h1 {
+    font-size: 2em;
+    line-height: 1.5em;
+    color: #fff;
+    background: #000;
+    padding: 15px 10px;
+    margin: 0;
+  }
+  ul#files {
+    border-top: 1px solid #cacaca;
+  }
+  ul#files li {
+    float: none;
+    width: auto !important;
+    display: block;
+    border-bottom: 1px solid #cacaca;
+    font-size: 2em;
+    line-height: 1.2em;
+    text-indent: 0;
+    margin: 0;
+  }
+  ul#files li:nth-child(odd) {
+    background: #e0e0e0;
+  }
+  ul#files li a {
+    height: auto;
+    border: 0;
+    border-radius: 0;
+    padding: 15px 10px;
+  }
+  ul#files li a:focus,
+  ul#files li a:hover {
+    border: 0;
+  }
+  #files .header,
+  #files .size,
+  #files .date {
+    display: none !important;
+  }
+  #files .name {
+    float: none;
+    display: inline-block;
+    width: 100%;
+    text-indent: 0;
+    background-position: 0 50%;
+  }
+  #files .icon .name {
+    text-indent: 41px;
+  }
+}
+#files .icon-directory .name {
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAABGdBTUEAALGPC/xhBQAAAWtQTFRFAAAA/PPQ9Nhc2q402qQ12qs2/PTX2pg12p81+/LM89NE9dto2q82+/fp2rM22qY39d6U+/bo2qo2/frx/vz32q812qs12qE279SU8c4w9NZP+/LK//367s9y7s925cp0/vzw9t92//342po2/vz25s1579B6+OSO2bQ0/v799NyT8tE79dld8Msm+OrC/vzx79KA2IYs7s6I9d6R4cJe9+OF/PLI/fry79OF/v30//328tWB89RJ8c9p8c0u9eCf//7+9txs6sts5Mdr+++5+u2z/vrv+/fq6cFz8dBs8tA57cpq+OaU9uGs27Y8//799NdX/PbY9uB89unJ//z14sNf+emh+emk+vDc+uys9+OL8dJy89NH+eic8tN5+OaV+OWR9N2n9dtl9t529+KF9+GB9Nue9NdU8tR/9t5y89qW9dpj89iO89eG/vvu2pQ12Y4z/vzy2Ict/vvv48dr/vzz4sNg///+2Igty3PqwQAAAAF0Uk5TAEDm2GYAAACtSURBVBjTY2AgA2iYlJWVhfohBPg0yx38y92dS0pKVOVBAqIi6sb2vsWWpfrFeTI8QAEhYQEta28nCwM1OVleZqCAmKCEkUdwYWmhQnFeOStQgL9cySqkNNDHVJGbiY0FKCCuYuYSGRsV5KgjxcXIARRQNncNj09JTgqw0ZbkZAcK5LuFJaRmZqfHeNnpSucDBQoiEtOycnIz4qI9bfUKQA6pKKqAgqIKQyK8BgAZ5yfODmnHrQAAAABJRU5ErkJggg==);
+}
+#files .icon-text-html .name {
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAHtSURBVDjLjZM9T9tQFIYpQ5eOMBKlW6eWIQipa8RfQKQghEAKqZgKFQgmFn5AWyVDCipVQZC2EqBWlEqdO2RCpAssQBRsx1+1ndix8wFvfW6wcUhQsfTI0j33PD7n+N4uAF2E+/S5RFwG/8Njl24/LyCIOI6j1+v1y0ajgU64cSSTybdBSVAwSMmmacKyLB/DMKBpGkRRZBJBEJBKpXyJl/yABLTBtm1Uq1X2JsrlMnRdhyRJTFCpVEAfSafTTUlQoFs1luxBAkoolUqQZbmtJTYTT/AoHInOfpcwtVtkwcSBgrkDGYph+60oisIq4Xm+VfB0+U/P0Lvj3NwPGfHPTcHMvoyFXwpe7UmQtAqTUCU0D1VVbwTPVk5jY19Fe3ZfQny7CE51WJDXqpjeEUHr45ki9rIqa4dmQiJfMLItGEs/FcQ2ucbRmdnSYy5vYWyLx/w3EaMfLmBaDpMQvuDJ65PY8Dpnz3wpYmLtApzcrIAqmfrEgdZH1grY/a36w6Xz0DKD8ES25/niYS6+wWE8mWfByY8cXmYEJFYLkHUHtVqNQcltAvoLD3v7o/FUHsNvzlnwxfsCEukC/ho3yUHaBN5Buo17Ojtyl+DqrnvQgUtfcC0ZcAdkUeA+ye7eMru9AUGIJPe4zh509UP/AAfNypi8oj/mAAAAAElFTkSuQmCC);
+}
+</style>
+    <script>
+      function $(id){
+        var el = 'string' == typeof id
+          ? document.getElementById(id)
+          : id;
+
+        el.on = function(event, fn){
+          if ('content loaded' == event) {
+            event = window.attachEvent ? "load" : "DOMContentLoaded";
+          }
+          el.addEventListener
+            ? el.addEventListener(event, fn, false)
+            : el.attachEvent("on" + event, fn);
+        };
+
+        el.all = function(selector){
+          return $(el.querySelectorAll(selector));
+        };
+
+        el.each = function(fn){
+          for (var i = 0, len = el.length; i < len; ++i) {
+            fn($(el[i]), i);
+          }
+        };
+
+        el.getClasses = function(){
+          return this.getAttribute('class').split(/\s+/);
+        };
+
+        el.addClass = function(name){
+          var classes = this.getAttribute('class');
+          el.setAttribute('class', classes
+            ? classes + ' ' + name
+            : name);
+        };
+
+        el.removeClass = function(name){
+          var classes = this.getClasses().filter(function(curr){
+            return curr != name;
+          });
+          this.setAttribute('class', classes.join(' '));
+        };
+
+        return el;
+      }
+
+      function search() {
+        var str = $('search').value.toLowerCase();
+        var links = $('files').all('a');
+
+        links.each(function(link){
+          var text = link.textContent.toLowerCase();
+
+          if ('..' == text) return;
+          if (str.length && ~text.indexOf(str)) {
+            link.addClass('highlight');
+          } else {
+            link.removeClass('highlight');
+          }
+        });
+      }
+
+      $(window).on('content loaded', function(){
+        $('search').on('keyup', search);
+      });
+    </script>
+  </head>
+  <body class="directory">
+    <input id="search" type="text" placeholder="Search" autocomplete="off">
+    <div id="wrapper">
+      <h1>
+<a href="/">~</a> / <a href="/public">public</a> / <a href="/public/afu">afu</a> / <a href="/public/afu/%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93">工作與生活的技術</a>
+</h1>
+      <ul id="files" class="view-tiles">
+<li><a href="/public/afu" class="icon icon-directory" title=".."><span class="name">..</span><span class="size"></span><span class="date"></span></a></li>
+<li><a href="/public/afu/%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93/110-%E5%8F%B0%E7%81%A3%E6%BD%9B%E6%B0%B4%E5%9F%B7%E7%85%A7%20OW%20%E8%AA%B2%E7%A8%8B%EF%BC%9A%E9%9D%A2%E5%B0%8D%E5%BF%83%E6%81%90%E6%87%BC%EF%BC%8C%E7%99%BC%E7%8F%BE%E6%96%B0%E6%BD%9B%E5%8A%9B%EF%BC%88%E4%B8%8A%E9%9B%86%EF%BC%89%20-%20%E7%8E%8B%E6%B0%B8%E7%A6%8F-%E7%A6%8F%E5%93%A5%E7%9A%84%E9%83%A8%E8%90%BD%E6%A0%BC%20%7C%20%E7%B0%A1%E5%A0%B1%E6%8A%80%E5%B7%A7%E6%8E%A8%E8%96%A6%E3%80%81%E5%85%A7%E9%83%A8%E8%AC%9B%E5%B8%AB%E6%8E%A8%E8%96%A6%E3%80%81%E9%A0%82%E5%B0%96%E4%BC%81%E6%A5%AD%E5%9F%B9%E8%A8%93%E6%95%99%E7%B7%B4.html" class="icon icon icon-html icon-text-html" title="110-台灣潛水執照 OW 課程：面對心恐懼，發現新潛力（上集） - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html"><span class="name">110-台灣潛水執照 OW 課程：面對心恐懼，發現新潛力（上集） - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html</span><span class="size">14731</span><span class="date">8/26/2022 3:24:11 PM</span></a></li>
+<li><a href="/public/afu/%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93/150-%E7%AB%AD%E7%9B%A1%E5%85%A8%E5%8A%9B%EF%BC%8C%E8%BF%BD%E6%B1%82%E6%9B%B4%E5%AE%8C%E7%BE%8E%E7%9A%84%E8%87%AA%E5%B7%B1%20-%20%E7%8E%8B%E6%B0%B8%E7%A6%8F-%E7%A6%8F%E5%93%A5%E7%9A%84%E9%83%A8%E8%90%BD%E6%A0%BC%20%7C%20%E7%B0%A1%E5%A0%B1%E6%8A%80%E5%B7%A7%E6%8E%A8%E8%96%A6%E3%80%81%E5%85%A7%E9%83%A8%E8%AC%9B%E5%B8%AB%E6%8E%A8%E8%96%A6%E3%80%81%E9%A0%82%E5%B0%96%E4%BC%81%E6%A5%AD%E5%9F%B9%E8%A8%93%E6%95%99%E7%B7%B4.html" class="icon icon icon-html icon-text-html" title="150-竭盡全力，追求更完美的自己 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html"><span class="name">150-竭盡全力，追求更完美的自己 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html</span><span class="size">9475</span><span class="date">8/26/2022 3:23:57 PM</span></a></li>
+<li><a href="/public/afu/%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93/189-%E5%AF%AB%E4%B8%8B%E6%82%A8%E7%9A%84%2050%20%E5%80%8B%E5%A4%A2%E6%83%B3%EF%BC%9A%E7%AF%89%E5%A4%A2%E3%80%82%E9%80%90%E5%A4%A2%20-%20%E7%8E%8B%E6%B0%B8%E7%A6%8F-%E7%A6%8F%E5%93%A5%E7%9A%84%E9%83%A8%E8%90%BD%E6%A0%BC%20%7C%20%E7%B0%A1%E5%A0%B1%E6%8A%80%E5%B7%A7%E6%8E%A8%E8%96%A6%E3%80%81%E5%85%A7%E9%83%A8%E8%AC%9B%E5%B8%AB%E6%8E%A8%E8%96%A6%E3%80%81%E9%A0%82%E5%B0%96%E4%BC%81%E6%A5%AD%E5%9F%B9%E8%A8%93%E6%95%99%E7%B7%B4.html" class="icon icon icon-html icon-text-html" title="189-寫下您的 50 個夢想：築夢。逐夢 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html"><span class="name">189-寫下您的 50 個夢想：築夢。逐夢 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html</span><span class="size">12844</span><span class="date">8/26/2022 3:28:43 PM</span></a></li>
+<li><a href="/public/afu/%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93/2226-%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93%EF%BC%8D%E5%AF%AB%E4%B8%8B%EF%BC%8C%E6%89%8D%E9%96%8B%E5%A7%8B%E5%81%9A%EF%BC%81%20-%20%E7%8E%8B%E6%B0%B8%E7%A6%8F-%E7%A6%8F%E5%93%A5%E7%9A%84%E9%83%A8%E8%90%BD%E6%A0%BC%20%7C%20%E7%B0%A1%E5%A0%B1%E6%8A%80%E5%B7%A7%E6%8E%A8%E8%96%A6%E3%80%81%E5%85%A7%E9%83%A8%E8%AC%9B%E5%B8%AB%E6%8E%A8%E8%96%A6%E3%80%81%E9%A0%82%E5%B0%96%E4%BC%81%E6%A5%AD%E5%9F%B9%E8%A8%93%E6%95%99%E7%B7%B4.html" class="icon icon icon-html icon-text-html" title="2226-工作與生活的技術－寫下，才開始做！ - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html"><span class="name">2226-工作與生活的技術－寫下，才開始做！ - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html</span><span class="size">8826</span><span class="date">8/26/2022 3:24:14 PM</span></a></li>
+<li><a href="/public/afu/%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93/2436-%E5%9C%A8%E5%AE%B6%E5%B7%A5%E4%BD%9C%EF%BC%8D%E6%9B%B4%E6%9C%89%E7%94%9F%E7%94%A2%E5%8A%9B%E7%9A%845%E5%80%8B%E7%A7%98%E8%A8%A3%EF%BC%88%E4%B8%8A%EF%BC%89%20-%20%E7%8E%8B%E6%B0%B8%E7%A6%8F-%E7%A6%8F%E5%93%A5%E7%9A%84%E9%83%A8%E8%90%BD%E6%A0%BC%20%7C%20%E7%B0%A1%E5%A0%B1%E6%8A%80%E5%B7%A7%E6%8E%A8%E8%96%A6%E3%80%81%E5%85%A7%E9%83%A8%E8%AC%9B%E5%B8%AB%E6%8E%A8%E8%96%A6%E3%80%81%E9%A0%82%E5%B0%96%E4%BC%81%E6%A5%AD%E5%9F%B9%E8%A8%93%E6%95%99%E7%B7%B4.html" class="icon icon icon-html icon-text-html" title="2436-在家工作－更有生產力的5個秘訣（上） - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html"><span class="name">2436-在家工作－更有生產力的5個秘訣（上） - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html</span><span class="size">10589</span><span class="date">8/26/2022 3:23:12 PM</span></a></li>
+<li><a href="/public/afu/%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93/2440-%E5%9C%A8%E5%AE%B6%E5%B7%A5%E4%BD%9C%EF%BC%8D%E6%9B%B4%E6%9C%89%E7%94%9F%E7%94%A2%E5%8A%9B%E7%9A%845%E5%80%8B%E7%A7%98%E8%A8%A3%EF%BC%88%E4%B8%8B%EF%BC%89%20-%20%E7%8E%8B%E6%B0%B8%E7%A6%8F-%E7%A6%8F%E5%93%A5%E7%9A%84%E9%83%A8%E8%90%BD%E6%A0%BC%20%7C%20%E7%B0%A1%E5%A0%B1%E6%8A%80%E5%B7%A7%E6%8E%A8%E8%96%A6%E3%80%81%E5%85%A7%E9%83%A8%E8%AC%9B%E5%B8%AB%E6%8E%A8%E8%96%A6%E3%80%81%E9%A0%82%E5%B0%96%E4%BC%81%E6%A5%AD%E5%9F%B9%E8%A8%93%E6%95%99%E7%B7%B4.html" class="icon icon icon-html icon-text-html" title="2440-在家工作－更有生產力的5個秘訣（下） - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html"><span class="name">2440-在家工作－更有生產力的5個秘訣（下） - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html</span><span class="size">8898</span><span class="date">8/26/2022 3:23:13 PM</span></a></li>
+<li><a href="/public/afu/%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93/2457-%E7%85%8E%E7%89%9B%E6%8E%92%E7%9A%84%E6%8A%80%E8%A1%93%EF%BC%9A%E5%9C%A8%E5%AE%B6%E7%85%8E%E5%A5%BD%E7%89%9B%E6%8E%92%E7%9A%848%E5%80%8B%E6%AD%A5%E9%A9%9F%EF%BC%88%20Blog%20%E5%9C%96%E6%96%87%E7%89%88%EF%BC%89%20-%20%E7%8E%8B%E6%B0%B8%E7%A6%8F-%E7%A6%8F%E5%93%A5%E7%9A%84%E9%83%A8%E8%90%BD%E6%A0%BC%20%7C%20%E7%B0%A1%E5%A0%B1%E6%8A%80%E5%B7%A7%E6%8E%A8%E8%96%A6%E3%80%81%E5%85%A7%E9%83%A8%E8%AC%9B%E5%B8%AB%E6%8E%A8%E8%96%A6%E3%80%81%E9%A0%82%E5%B0%96%E4%BC%81%E6%A5%AD%E5%9F%B9%E8%A8%93%E6%95%99%E7%B7%B4.html" class="icon icon icon-html icon-text-html" title="2457-煎牛排的技術：在家煎好牛排的8個步驟（ Blog 圖文版） - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html"><span class="name">2457-煎牛排的技術：在家煎好牛排的8個步驟（ Blog 圖文版） - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html</span><span class="size">13711</span><span class="date">8/26/2022 3:28:17 PM</span></a></li>
+<li><a href="/public/afu/%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93/2644-%E9%97%9C%E6%96%BC%E5%88%9D%E9%90%B5%E6%8C%91%E6%88%B0%EF%BC%8C%E6%88%91%E6%83%B3%E8%AA%AA%E7%9A%84%E6%98%AF%20%E2%80%A6%20%EF%BC%9A%E5%AF%AB%E6%96%BC2017%20%E5%88%9D%E6%AC%A1%E9%90%B5%E4%BA%BA%E4%B8%89%E9%A0%85%20-%20%E7%8E%8B%E6%B0%B8%E7%A6%8F-%E7%A6%8F%E5%93%A5%E7%9A%84%E9%83%A8%E8%90%BD%E6%A0%BC%20%7C%20%E7%B0%A1%E5%A0%B1%E6%8A%80%E5%B7%A7%E6%8E%A8%E8%96%A6%E3%80%81%E5%85%A7%E9%83%A8%E8%AC%9B%E5%B8%AB%E6%8E%A8%E8%96%A6%E3%80%81%E9%A0%82%E5%B0%96%E4%BC%81%E6%A5%AD%E5%9F%B9%E8%A8%93%E6%95%99%E7%B7%B4.html" class="icon icon icon-html icon-text-html" title="2644-關於初鐵挑戰，我想說的是 … ：寫於2017 初次鐵人三項 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html"><span class="name">2644-關於初鐵挑戰，我想說的是 … ：寫於2017 初次鐵人三項 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html</span><span class="size">11385</span><span class="date">8/26/2022 3:24:13 PM</span></a></li>
+<li><a href="/public/afu/%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93/2675-%E7%94%A8%E6%84%8F%E5%BF%97%E5%8A%9B%E5%9F%B9%E9%A4%8A%E7%BF%92%E6%85%A3%E3%80%81%E7%94%A8%E7%BF%92%E6%85%A3%E5%8A%9B%E5%9F%B9%E9%A4%8A%E8%87%AA%E5%B7%B1%EF%BC%8D%E3%80%8C%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93%E3%80%8D%20-%20%E7%8E%8B%E6%B0%B8%E7%A6%8F-%E7%A6%8F%E5%93%A5%E7%9A%84%E9%83%A8%E8%90%BD%E6%A0%BC%20%7C%20%E7%B0%A1%E5%A0%B1%E6%8A%80%E5%B7%A7%E6%8E%A8%E8%96%A6%E3%80%81%E5%85%A7%E9%83%A8%E8%AC%9B%E5%B8%AB%E6%8E%A8%E8%96%A6%E3%80%81%E9%A0%82%E5%B0%96%E4%BC%81%E6%A5%AD%E5%9F%B9%E8%A8%93%E6%95%99%E7%B7%B4.html" class="icon icon icon-html icon-text-html" title="2675-用意志力培養習慣、用習慣力培養自己－「工作與生活的技術」 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html"><span class="name">2675-用意志力培養習慣、用習慣力培養自己－「工作與生活的技術」 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html</span><span class="size">6821</span><span class="date">8/26/2022 3:28:45 PM</span></a></li>
+<li><a href="/public/afu/%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93/2678-%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E3%80%8C%E5%A4%B1%E6%95%97%E3%80%8D%E7%9A%845%E5%80%8B%E6%8A%80%E8%A1%93%20-%20%E7%8E%8B%E6%B0%B8%E7%A6%8F-%E7%A6%8F%E5%93%A5%E7%9A%84%E9%83%A8%E8%90%BD%E6%A0%BC%20%7C%20%E7%B0%A1%E5%A0%B1%E6%8A%80%E5%B7%A7%E6%8E%A8%E8%96%A6%E3%80%81%E5%85%A7%E9%83%A8%E8%AC%9B%E5%B8%AB%E6%8E%A8%E8%96%A6%E3%80%81%E9%A0%82%E5%B0%96%E4%BC%81%E6%A5%AD%E5%9F%B9%E8%A8%93%E6%95%99%E7%B7%B4.html" class="icon icon icon-html icon-text-html" title="2678-工作與生活「失敗」的5個技術 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html"><span class="name">2678-工作與生活「失敗」的5個技術 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html</span><span class="size">8350</span><span class="date">8/26/2022 3:28:42 PM</span></a></li>
+<li><a href="/public/afu/%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93/2680-%E9%AB%98%E9%90%B5%E8%88%87%E4%BA%BA%E7%94%9F%EF%BC%9A%E5%BE%9E%E6%90%AD%E9%AB%98%E9%90%B5%E7%9A%843%E5%80%8B%E5%AD%B8%E7%BF%92%EF%BC%8D%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93%20-%20%E7%8E%8B%E6%B0%B8%E7%A6%8F-%E7%A6%8F%E5%93%A5%E7%9A%84%E9%83%A8%E8%90%BD%E6%A0%BC%20%7C%20%E7%B0%A1%E5%A0%B1%E6%8A%80%E5%B7%A7%E6%8E%A8%E8%96%A6%E3%80%81%E5%85%A7%E9%83%A8%E8%AC%9B%E5%B8%AB%E6%8E%A8%E8%96%A6%E3%80%81%E9%A0%82%E5%B0%96%E4%BC%81%E6%A5%AD%E5%9F%B9%E8%A8%93%E6%95%99%E7%B7%B4.html" class="icon icon icon-html icon-text-html" title="2680-高鐵與人生：從搭高鐵的3個學習－工作與生活的技術 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html"><span class="name">2680-高鐵與人生：從搭高鐵的3個學習－工作與生活的技術 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html</span><span class="size">11336</span><span class="date">8/26/2022 3:28:41 PM</span></a></li>
+<li><a href="/public/afu/%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93/2686-%E5%A6%82%E4%BD%95%E6%BA%96%E5%82%99%E4%B8%80%E5%A0%B4%E4%B8%83%E5%88%86%E9%90%98%E7%9A%84%E7%B0%A1%E5%A0%B1%EF%BC%9A2020%E5%B0%88%E6%A5%AD%E7%B0%A1%E5%A0%B1%E5%8A%9B%E5%90%8C%E5%AD%B8%E6%9C%83%20-%20%E7%8E%8B%E6%B0%B8%E7%A6%8F-%E7%A6%8F%E5%93%A5%E7%9A%84%E9%83%A8%E8%90%BD%E6%A0%BC%20%7C%20%E7%B0%A1%E5%A0%B1%E6%8A%80%E5%B7%A7%E6%8E%A8%E8%96%A6%E3%80%81%E5%85%A7%E9%83%A8%E8%AC%9B%E5%B8%AB%E6%8E%A8%E8%96%A6%E3%80%81%E9%A0%82%E5%B0%96%E4%BC%81%E6%A5%AD%E5%9F%B9%E8%A8%93%E6%95%99%E7%B7%B4.html" class="icon icon icon-html icon-text-html" title="2686-如何準備一場七分鐘的簡報：2020專業簡報力同學會 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html"><span class="name">2686-如何準備一場七分鐘的簡報：2020專業簡報力同學會 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html</span><span class="size">14110</span><span class="date">8/26/2022 3:28:40 PM</span></a></li>
+<li><a href="/public/afu/%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93/2692-%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93%EF%BC%8D%E8%87%AA%E5%BA%8F%E8%8D%89%E7%A8%BF%20-%20%E7%8E%8B%E6%B0%B8%E7%A6%8F-%E7%A6%8F%E5%93%A5%E7%9A%84%E9%83%A8%E8%90%BD%E6%A0%BC%20%7C%20%E7%B0%A1%E5%A0%B1%E6%8A%80%E5%B7%A7%E6%8E%A8%E8%96%A6%E3%80%81%E5%85%A7%E9%83%A8%E8%AC%9B%E5%B8%AB%E6%8E%A8%E8%96%A6%E3%80%81%E9%A0%82%E5%B0%96%E4%BC%81%E6%A5%AD%E5%9F%B9%E8%A8%93%E6%95%99%E7%B7%B4.html" class="icon icon icon-html icon-text-html" title="2692-工作與生活的技術－自序草稿 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html"><span class="name">2692-工作與生活的技術－自序草稿 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html</span><span class="size">9298</span><span class="date">8/26/2022 3:28:39 PM</span></a></li>
+<li><a href="/public/afu/%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93/2694-%E6%B3%A1%E4%B8%80%E6%9D%AF%E5%AE%8C%E7%BE%8E%E7%9A%84%203x%20Espresso%20%3A%20%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93%20-%20%E7%8E%8B%E6%B0%B8%E7%A6%8F-%E7%A6%8F%E5%93%A5%E7%9A%84%E9%83%A8%E8%90%BD%E6%A0%BC%20%7C%20%E7%B0%A1%E5%A0%B1%E6%8A%80%E5%B7%A7%E6%8E%A8%E8%96%A6%E3%80%81%E5%85%A7%E9%83%A8%E8%AC%9B%E5%B8%AB%E6%8E%A8%E8%96%A6%E3%80%81%E9%A0%82%E5%B0%96%E4%BC%81%E6%A5%AD%E5%9F%B9%E8%A8%93%E6%95%99%E7%B7%B4.html" class="icon icon icon-html icon-text-html" title="2694-泡一杯完美的 3x Espresso : 工作與生活的技術 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html"><span class="name">2694-泡一杯完美的 3x Espresso : 工作與生活的技術 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html</span><span class="size">13301</span><span class="date">8/26/2022 3:24:02 PM</span></a></li>
+<li><a href="/public/afu/%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93/2699-%E7%BF%92%E6%85%A3%E6%89%8D%E6%9C%83%E8%87%AA%E5%9C%A8%E3%80%81%E8%87%AA%E5%9C%A8%E6%89%8D%E6%9C%83%E4%BA%AB%E5%8F%97%20-%20%E7%8E%8B%E6%B0%B8%E7%A6%8F-%E7%A6%8F%E5%93%A5%E7%9A%84%E9%83%A8%E8%90%BD%E6%A0%BC%20%7C%20%E7%B0%A1%E5%A0%B1%E6%8A%80%E5%B7%A7%E6%8E%A8%E8%96%A6%E3%80%81%E5%85%A7%E9%83%A8%E8%AC%9B%E5%B8%AB%E6%8E%A8%E8%96%A6%E3%80%81%E9%A0%82%E5%B0%96%E4%BC%81%E6%A5%AD%E5%9F%B9%E8%A8%93%E6%95%99%E7%B7%B4.html" class="icon icon icon-html icon-text-html" title="2699-習慣才會自在、自在才會享受 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html"><span class="name">2699-習慣才會自在、自在才會享受 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html</span><span class="size">16052</span><span class="date">8/26/2022 3:28:38 PM</span></a></li>
+<li><a href="/public/afu/%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93/2708-%E5%8F%AF%E4%BB%A5%E8%AA%8D%E7%9C%9F%E3%80%81%E4%B9%9F%E5%8F%AF%E4%BB%A5%E4%B8%8D%E8%AA%8D%E7%9C%9F%EF%BC%8C%E5%B0%B1%E7%9C%8B%E4%BD%A0%E7%9A%84%E9%81%B8%E6%93%87%EF%BC%9A%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93%20-%20%E7%8E%8B%E6%B0%B8%E7%A6%8F-%E7%A6%8F%E5%93%A5%E7%9A%84%E9%83%A8%E8%90%BD%E6%A0%BC%20%7C%20%E7%B0%A1%E5%A0%B1%E6%8A%80%E5%B7%A7%E6%8E%A8%E8%96%A6%E3%80%81%E5%85%A7%E9%83%A8%E8%AC%9B%E5%B8%AB%E6%8E%A8%E8%96%A6%E3%80%81%E9%A0%82%E5%B0%96%E4%BC%81%E6%A5%AD%E5%9F%B9%E8%A8%93%E6%95%99%E7%B7%B4.html" class="icon icon icon-html icon-text-html" title="2708-可以認真、也可以不認真，就看你的選擇：工作與生活的技術 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html"><span class="name">2708-可以認真、也可以不認真，就看你的選擇：工作與生活的技術 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html</span><span class="size">8991</span><span class="date">8/26/2022 3:28:37 PM</span></a></li>
+<li><a href="/public/afu/%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93/2713-%E7%A7%BB%E5%8B%95%E5%B7%A5%E4%BD%9C%E5%8A%9B%EF%BC%9A%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93%20-%20%E7%8E%8B%E6%B0%B8%E7%A6%8F-%E7%A6%8F%E5%93%A5%E7%9A%84%E9%83%A8%E8%90%BD%E6%A0%BC%20%7C%20%E7%B0%A1%E5%A0%B1%E6%8A%80%E5%B7%A7%E6%8E%A8%E8%96%A6%E3%80%81%E5%85%A7%E9%83%A8%E8%AC%9B%E5%B8%AB%E6%8E%A8%E8%96%A6%E3%80%81%E9%A0%82%E5%B0%96%E4%BC%81%E6%A5%AD%E5%9F%B9%E8%A8%93%E6%95%99%E7%B7%B4.html" class="icon icon icon-html icon-text-html" title="2713-移動工作力：工作與生活的技術 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html"><span class="name">2713-移動工作力：工作與生活的技術 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html</span><span class="size">11991</span><span class="date">8/26/2022 3:28:37 PM</span></a></li>
+<li><a href="/public/afu/%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93/2715-%E5%BE%9E%E5%AE%85%E7%94%B7%E5%88%B0%E5%AE%85%E7%88%B8%EF%BC%8D%E8%B6%85%E7%B4%9A%E5%A5%B6%E7%88%B8%E7%9A%84%E6%8A%80%E8%A1%93%EF%BC%9A%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93%20-%20%E7%8E%8B%E6%B0%B8%E7%A6%8F-%E7%A6%8F%E5%93%A5%E7%9A%84%E9%83%A8%E8%90%BD%E6%A0%BC%20%7C%20%E7%B0%A1%E5%A0%B1%E6%8A%80%E5%B7%A7%E6%8E%A8%E8%96%A6%E3%80%81%E5%85%A7%E9%83%A8%E8%AC%9B%E5%B8%AB%E6%8E%A8%E8%96%A6%E3%80%81%E9%A0%82%E5%B0%96%E4%BC%81%E6%A5%AD%E5%9F%B9%E8%A8%93%E6%95%99%E7%B7%B4.html" class="icon icon icon-html icon-text-html" title="2715-從宅男到宅爸－超級奶爸的技術：工作與生活的技術 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html"><span class="name">2715-從宅男到宅爸－超級奶爸的技術：工作與生活的技術 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html</span><span class="size">10454</span><span class="date">8/26/2022 3:28:36 PM</span></a></li>
+<li><a href="/public/afu/%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93/2727-%E6%89%93%E9%80%A0%E7%90%86%E6%83%B3%E4%B8%AD%E7%9A%84%E5%AE%B6%EF%BC%9A%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93%20-%20%E7%8E%8B%E6%B0%B8%E7%A6%8F-%E7%A6%8F%E5%93%A5%E7%9A%84%E9%83%A8%E8%90%BD%E6%A0%BC%20%7C%20%E7%B0%A1%E5%A0%B1%E6%8A%80%E5%B7%A7%E6%8E%A8%E8%96%A6%E3%80%81%E5%85%A7%E9%83%A8%E8%AC%9B%E5%B8%AB%E6%8E%A8%E8%96%A6%E3%80%81%E9%A0%82%E5%B0%96%E4%BC%81%E6%A5%AD%E5%9F%B9%E8%A8%93%E6%95%99%E7%B7%B4.html" class="icon icon icon-html icon-text-html" title="2727-打造理想中的家：工作與生活的技術 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html"><span class="name">2727-打造理想中的家：工作與生活的技術 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html</span><span class="size">10980</span><span class="date">8/26/2022 3:28:34 PM</span></a></li>
+<li><a href="/public/afu/%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93/2730-%E4%B9%9F%E8%A8%B1%E4%BD%A0%E9%8C%AF%E6%80%AA%E4%BA%86%E8%95%83%E8%8C%84%E9%90%98%EF%BC%9F%E8%AE%93%E8%95%83%E8%8C%84%E9%90%98%E5%B7%A5%E4%BD%9C%E8%A1%93%E6%9B%B4%E6%9C%89%E6%95%88%E7%9A%843%E5%80%8B%E9%97%9C%E9%8D%B5%20-%20%E7%8E%8B%E6%B0%B8%E7%A6%8F-%E7%A6%8F%E5%93%A5%E7%9A%84%E9%83%A8%E8%90%BD%E6%A0%BC%20%7C%20%E7%B0%A1%E5%A0%B1%E6%8A%80%E5%B7%A7%E6%8E%A8%E8%96%A6%E3%80%81%E5%85%A7%E9%83%A8%E8%AC%9B%E5%B8%AB%E6%8E%A8%E8%96%A6%E3%80%81%E9%A0%82%E5%B0%96%E4%BC%81%E6%A5%AD%E5%9F%B9%E8%A8%93%E6%95%99%E7%B7%B4.html" class="icon icon icon-html icon-text-html" title="2730-也許你錯怪了蕃茄鐘？讓蕃茄鐘工作術更有效的3個關鍵 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html"><span class="name">2730-也許你錯怪了蕃茄鐘？讓蕃茄鐘工作術更有效的3個關鍵 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html</span><span class="size">9768</span><span class="date">8/26/2022 3:28:42 PM</span></a></li>
+<li><a href="/public/afu/%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93/2748-%E9%8A%B7%E5%94%AE%E5%8A%9B%EF%BC%9A%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93%20-%20%E7%8E%8B%E6%B0%B8%E7%A6%8F-%E7%A6%8F%E5%93%A5%E7%9A%84%E9%83%A8%E8%90%BD%E6%A0%BC%20%7C%20%E7%B0%A1%E5%A0%B1%E6%8A%80%E5%B7%A7%E6%8E%A8%E8%96%A6%E3%80%81%E5%85%A7%E9%83%A8%E8%AC%9B%E5%B8%AB%E6%8E%A8%E8%96%A6%E3%80%81%E9%A0%82%E5%B0%96%E4%BC%81%E6%A5%AD%E5%9F%B9%E8%A8%93%E6%95%99%E7%B7%B4.html" class="icon icon icon-html icon-text-html" title="2748-銷售力：工作與生活的技術 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html"><span class="name">2748-銷售力：工作與生活的技術 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html</span><span class="size">19206</span><span class="date">8/26/2022 3:28:35 PM</span></a></li>
+<li><a href="/public/afu/%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93/2752-%E3%80%8C%E5%AF%AB%E4%BD%9C%E5%8A%9B%E3%80%8D%EF%BC%8D%E4%B8%8B%E9%9B%86%EF%BC%9A%E4%BA%94%E5%80%8B%E6%8F%90%E6%98%87%E5%AF%AB%E4%BD%9C%E5%8A%9B%E7%9A%84%E5%BB%BA%E8%AD%B0%EF%BC%9A%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93%20-%20%E7%8E%8B%E6%B0%B8%E7%A6%8F-%E7%A6%8F%E5%93%A5%E7%9A%84%E9%83%A8%E8%90%BD%E6%A0%BC%20%7C%20%E7%B0%A1%E5%A0%B1%E6%8A%80%E5%B7%A7%E6%8E%A8%E8%96%A6%E3%80%81%E5%85%A7%E9%83%A8%E8%AC%9B%E5%B8%AB%E6%8E%A8%E8%96%A6%E3%80%81%E9%A0%82%E5%B0%96%E4%BC%81%E6%A5%AD%E5%9F%B9%E8%A8%93%E6%95%99%E7%B7%B4.html" class="icon icon icon-html icon-text-html" title="2752-「寫作力」－下集：五個提昇寫作力的建議：工作與生活的技術 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html"><span class="name">2752-「寫作力」－下集：五個提昇寫作力的建議：工作與生活的技術 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html</span><span class="size">19871</span><span class="date">8/26/2022 3:28:34 PM</span></a></li>
+<li><a href="/public/afu/%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93/2762-%E3%80%8C%E5%AF%AB%E4%BD%9C%E5%8A%9B%E3%80%8D%EF%BC%8D%E4%B8%8A%E9%9B%86%EF%BC%8C%E6%88%91%E7%9A%84%E5%AF%AB%E4%BD%9C%E7%A3%A8%E7%B7%B4%EF%BC%9A%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93%20-%20%E7%8E%8B%E6%B0%B8%E7%A6%8F-%E7%A6%8F%E5%93%A5%E7%9A%84%E9%83%A8%E8%90%BD%E6%A0%BC%20%7C%20%E7%B0%A1%E5%A0%B1%E6%8A%80%E5%B7%A7%E6%8E%A8%E8%96%A6%E3%80%81%E5%85%A7%E9%83%A8%E8%AC%9B%E5%B8%AB%E6%8E%A8%E8%96%A6%E3%80%81%E9%A0%82%E5%B0%96%E4%BC%81%E6%A5%AD%E5%9F%B9%E8%A8%93%E6%95%99%E7%B7%B4.html" class="icon icon icon-html icon-text-html" title="2762-「寫作力」－上集，我的寫作磨練：工作與生活的技術 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html"><span class="name">2762-「寫作力」－上集，我的寫作磨練：工作與生活的技術 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html</span><span class="size">22885</span><span class="date">8/26/2022 3:28:32 PM</span></a></li>
+<li><a href="/public/afu/%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93/2770-%E5%B8%B6%E9%AB%94%E9%A9%97%E3%80%81%E7%9C%8B%E5%BD%B1%E7%89%87%E3%80%81%E8%81%8A%E7%B4%B0%E7%AF%80%EF%BC%9A%E3%80%8A%E6%95%99%E5%AD%B8%E7%9A%84%E6%8A%80%E8%A1%93%EF%BC%8D%E7%B7%9A%E4%B8%8A%E8%AA%B2%E7%A8%8B%E3%80%8B%E7%B7%9A%E4%B8%8B%E9%AB%94%E9%A9%97%E4%B9%8B%E5%A4%9C%20-%20%E7%8E%8B%E6%B0%B8%E7%A6%8F-%E7%A6%8F%E5%93%A5%E7%9A%84%E9%83%A8%E8%90%BD%E6%A0%BC%20%7C%20%E7%B0%A1%E5%A0%B1%E6%8A%80%E5%B7%A7%E6%8E%A8%E8%96%A6%E3%80%81%E5%85%A7%E9%83%A8%E8%AC%9B%E5%B8%AB%E6%8E%A8%E8%96%A6%E3%80%81%E9%A0%82%E5%B0%96%E4%BC%81%E6%A5%AD%E5%9F%B9%E8%A8%93%E6%95%99%E7%B7%B4.html" class="icon icon icon-html icon-text-html" title="2770-帶體驗、看影片、聊細節：《教學的技術－線上課程》線下體驗之夜 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html"><span class="name">2770-帶體驗、看影片、聊細節：《教學的技術－線上課程》線下體驗之夜 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html</span><span class="size">17329</span><span class="date">8/26/2022 3:28:31 PM</span></a></li>
+<li><a href="/public/afu/%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93/2782-%E8%B2%B7%E5%A5%BD%E8%B6%B3%E5%A4%A0%E7%9A%84%E4%BF%9D%E9%9A%AA%EF%BC%8C%E4%BF%9D%E8%AD%B7%E4%BD%A0%E7%9A%84%E6%99%82%E9%96%93%E5%8F%8A%E6%B3%A8%E6%84%8F%E5%8A%9B%E8%B3%87%E6%BA%90%EF%BC%9A%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93%20-%20%E7%8E%8B%E6%B0%B8%E7%A6%8F-%E7%A6%8F%E5%93%A5%E7%9A%84%E9%83%A8%E8%90%BD%E6%A0%BC%20%7C%20%E7%B0%A1%E5%A0%B1%E6%8A%80%E5%B7%A7%E6%8E%A8%E8%96%A6%E3%80%81%E5%85%A7%E9%83%A8%E8%AC%9B%E5%B8%AB%E6%8E%A8%E8%96%A6%E3%80%81%E9%A0%82%E5%B0%96%E4%BC%81%E6%A5%AD%E5%9F%B9%E8%A8%93%E6%95%99%E7%B7%B4.html" class="icon icon icon-html icon-text-html" title="2782-買好足夠的保險，保護你的時間及注意力資源：工作與生活的技術 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html"><span class="name">2782-買好足夠的保險，保護你的時間及注意力資源：工作與生活的技術 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html</span><span class="size">13701</span><span class="date">8/26/2022 3:28:30 PM</span></a></li>
+<li><a href="/public/afu/%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93/2785-%E7%94%A8%E5%91%A8%E5%B7%A5%E4%BD%9C%E8%A8%88%E5%8A%83%E5%B9%AB%E5%8A%A9%E4%BD%A0%E5%AF%A6%E7%8F%BE%E7%9B%AE%E6%A8%99%EF%BC%9A%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93%20-%20%E7%8E%8B%E6%B0%B8%E7%A6%8F-%E7%A6%8F%E5%93%A5%E7%9A%84%E9%83%A8%E8%90%BD%E6%A0%BC%20%7C%20%E7%B0%A1%E5%A0%B1%E6%8A%80%E5%B7%A7%E6%8E%A8%E8%96%A6%E3%80%81%E5%85%A7%E9%83%A8%E8%AC%9B%E5%B8%AB%E6%8E%A8%E8%96%A6%E3%80%81%E9%A0%82%E5%B0%96%E4%BC%81%E6%A5%AD%E5%9F%B9%E8%A8%93%E6%95%99%E7%B7%B4.html" class="icon icon icon-html icon-text-html" title="2785-用周工作計劃幫助你實現目標：工作與生活的技術 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html"><span class="name">2785-用周工作計劃幫助你實現目標：工作與生活的技術 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html</span><span class="size">20589</span><span class="date">8/26/2022 3:28:29 PM</span></a></li>
+<li><a href="/public/afu/%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93/2789-%E5%9C%A8%E7%94%9F%E6%B4%BB%E4%B8%AD%E5%AF%A6%E8%B8%90%E8%81%B7%E4%BA%BA%E7%B2%BE%E7%A5%9E%EF%BC%9A%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93%20-%20%E7%8E%8B%E6%B0%B8%E7%A6%8F-%E7%A6%8F%E5%93%A5%E7%9A%84%E9%83%A8%E8%90%BD%E6%A0%BC%20%7C%20%E7%B0%A1%E5%A0%B1%E6%8A%80%E5%B7%A7%E6%8E%A8%E8%96%A6%E3%80%81%E5%85%A7%E9%83%A8%E8%AC%9B%E5%B8%AB%E6%8E%A8%E8%96%A6%E3%80%81%E9%A0%82%E5%B0%96%E4%BC%81%E6%A5%AD%E5%9F%B9%E8%A8%93%E6%95%99%E7%B7%B4.html" class="icon icon icon-html icon-text-html" title="2789-在生活中實踐職人精神：工作與生活的技術 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html"><span class="name">2789-在生活中實踐職人精神：工作與生活的技術 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html</span><span class="size">11419</span><span class="date">8/26/2022 3:28:29 PM</span></a></li>
+<li><a href="/public/afu/%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93/2792-%E4%BC%91%E6%81%AF%E7%9A%84%E6%8A%80%E8%A1%93%20-%20%E7%8E%8B%E6%B0%B8%E7%A6%8F-%E7%A6%8F%E5%93%A5%E7%9A%84%E9%83%A8%E8%90%BD%E6%A0%BC%20%7C%20%E7%B0%A1%E5%A0%B1%E6%8A%80%E5%B7%A7%E6%8E%A8%E8%96%A6%E3%80%81%E5%85%A7%E9%83%A8%E8%AC%9B%E5%B8%AB%E6%8E%A8%E8%96%A6%E3%80%81%E9%A0%82%E5%B0%96%E4%BC%81%E6%A5%AD%E5%9F%B9%E8%A8%93%E6%95%99%E7%B7%B4.html" class="icon icon icon-html icon-text-html" title="2792-休息的技術 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html"><span class="name">2792-休息的技術 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html</span><span class="size">12728</span><span class="date">8/26/2022 3:28:28 PM</span></a></li>
+<li><a href="/public/afu/%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93/2795-%E9%96%B1%E8%AE%80%E7%9A%84%E6%8A%80%E8%A1%93%EF%BC%9A%E7%A6%8F%E5%93%A5%E7%89%88%EF%BC%8D%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93%20-%20%E7%8E%8B%E6%B0%B8%E7%A6%8F-%E7%A6%8F%E5%93%A5%E7%9A%84%E9%83%A8%E8%90%BD%E6%A0%BC%20%7C%20%E7%B0%A1%E5%A0%B1%E6%8A%80%E5%B7%A7%E6%8E%A8%E8%96%A6%E3%80%81%E5%85%A7%E9%83%A8%E8%AC%9B%E5%B8%AB%E6%8E%A8%E8%96%A6%E3%80%81%E9%A0%82%E5%B0%96%E4%BC%81%E6%A5%AD%E5%9F%B9%E8%A8%93%E6%95%99%E7%B7%B4.html" class="icon icon icon-html icon-text-html" title="2795-閱讀的技術：福哥版－工作與生活的技術 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html"><span class="name">2795-閱讀的技術：福哥版－工作與生活的技術 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html</span><span class="size">16769</span><span class="date">8/26/2022 3:28:27 PM</span></a></li>
+<li><a href="/public/afu/%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93/2805-%E5%AD%A9%E5%AD%90%E7%9A%84%E6%95%99%E8%82%B2%E7%84%A1%E5%AE%83%EF%BC%8C%E5%94%AF%E6%84%9B%E3%80%81%E6%A6%9C%E6%A8%A3%E3%80%81%E8%88%87%E9%99%AA%E4%BC%B4%EF%BC%9A%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93%20-%20%E7%8E%8B%E6%B0%B8%E7%A6%8F-%E7%A6%8F%E5%93%A5%E7%9A%84%E9%83%A8%E8%90%BD%E6%A0%BC%20%7C%20%E7%B0%A1%E5%A0%B1%E6%8A%80%E5%B7%A7%E6%8E%A8%E8%96%A6%E3%80%81%E5%85%A7%E9%83%A8%E8%AC%9B%E5%B8%AB%E6%8E%A8%E8%96%A6%E3%80%81%E9%A0%82%E5%B0%96%E4%BC%81%E6%A5%AD%E5%9F%B9%E8%A8%93%E6%95%99%E7%B7%B4.html" class="icon icon icon-html icon-text-html" title="2805-孩子的教育無它，唯愛、榜樣、與陪伴：工作與生活的技術 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html"><span class="name">2805-孩子的教育無它，唯愛、榜樣、與陪伴：工作與生活的技術 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html</span><span class="size">20385</span><span class="date">8/26/2022 3:28:25 PM</span></a></li>
+<li><a href="/public/afu/%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93/2813-%E6%87%B6%E4%BA%BA%E6%AA%94%E6%A1%88%E6%95%B4%E7%90%86%E6%B3%95%203%EF%BC%9A%E5%96%AE%E4%B8%80%E6%AA%94%E6%A1%88%E6%96%87%E5%AD%97%E5%AF%AB%E4%BD%9C%E5%A0%86%20-%20%E7%8E%8B%E6%B0%B8%E7%A6%8F-%E7%A6%8F%E5%93%A5%E7%9A%84%E9%83%A8%E8%90%BD%E6%A0%BC%20%7C%20%E7%B0%A1%E5%A0%B1%E6%8A%80%E5%B7%A7%E6%8E%A8%E8%96%A6%E3%80%81%E5%85%A7%E9%83%A8%E8%AC%9B%E5%B8%AB%E6%8E%A8%E8%96%A6%E3%80%81%E9%A0%82%E5%B0%96%E4%BC%81%E6%A5%AD%E5%9F%B9%E8%A8%93%E6%95%99%E7%B7%B4.html" class="icon icon icon-html icon-text-html" title="2813-懶人檔案整理法 3：單一檔案文字寫作堆 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html"><span class="name">2813-懶人檔案整理法 3：單一檔案文字寫作堆 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html</span><span class="size">12086</span><span class="date">8/26/2022 3:28:24 PM</span></a></li>
+<li><a href="/public/afu/%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93/2816-%E7%82%BA%E4%BB%80%E9%BA%BC%E8%A6%81%E8%BF%BD%E6%B1%82%E6%88%90%E9%95%B7%EF%BC%9A%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93%20-%20%E7%8E%8B%E6%B0%B8%E7%A6%8F-%E7%A6%8F%E5%93%A5%E7%9A%84%E9%83%A8%E8%90%BD%E6%A0%BC%20%7C%20%E7%B0%A1%E5%A0%B1%E6%8A%80%E5%B7%A7%E6%8E%A8%E8%96%A6%E3%80%81%E5%85%A7%E9%83%A8%E8%AC%9B%E5%B8%AB%E6%8E%A8%E8%96%A6%E3%80%81%E9%A0%82%E5%B0%96%E4%BC%81%E6%A5%AD%E5%9F%B9%E8%A8%93%E6%95%99%E7%B7%B4.html" class="icon icon icon-html icon-text-html" title="2816-為什麼要追求成長：工作與生活的技術 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html"><span class="name">2816-為什麼要追求成長：工作與生活的技術 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html</span><span class="size">15831</span><span class="date">8/26/2022 3:28:24 PM</span></a></li>
+<li><a href="/public/afu/%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93/2819-%E5%BE%9E%E9%90%B5%E4%BA%BA%E4%B8%89%E9%A0%85%E8%A8%93%E7%B7%B4%E7%9A%84%E5%AD%B8%E7%BF%92%EF%BC%9A%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93%20-%20%E7%8E%8B%E6%B0%B8%E7%A6%8F-%E7%A6%8F%E5%93%A5%E7%9A%84%E9%83%A8%E8%90%BD%E6%A0%BC%20%7C%20%E7%B0%A1%E5%A0%B1%E6%8A%80%E5%B7%A7%E6%8E%A8%E8%96%A6%E3%80%81%E5%85%A7%E9%83%A8%E8%AC%9B%E5%B8%AB%E6%8E%A8%E8%96%A6%E3%80%81%E9%A0%82%E5%B0%96%E4%BC%81%E6%A5%AD%E5%9F%B9%E8%A8%93%E6%95%99%E7%B7%B4.html" class="icon icon icon-html icon-text-html" title="2819-從鐵人三項訓練的學習：工作與生活的技術 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html"><span class="name">2819-從鐵人三項訓練的學習：工作與生活的技術 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html</span><span class="size">15347</span><span class="date">8/26/2022 3:28:23 PM</span></a></li>
+<li><a href="/public/afu/%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93/2822-3%E5%80%8B%E9%87%8D%E8%A6%81%E7%9A%84%E5%BF%83%E6%85%8B%E8%A8%AD%E5%AE%9A%EF%BC%88MindSet%EF%BC%89%EF%BC%9A%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93%20-%20%E7%8E%8B%E6%B0%B8%E7%A6%8F-%E7%A6%8F%E5%93%A5%E7%9A%84%E9%83%A8%E8%90%BD%E6%A0%BC%20%7C%20%E7%B0%A1%E5%A0%B1%E6%8A%80%E5%B7%A7%E6%8E%A8%E8%96%A6%E3%80%81%E5%85%A7%E9%83%A8%E8%AC%9B%E5%B8%AB%E6%8E%A8%E8%96%A6%E3%80%81%E9%A0%82%E5%B0%96%E4%BC%81%E6%A5%AD%E5%9F%B9%E8%A8%93%E6%95%99%E7%B7%B4.html" class="icon icon icon-html icon-text-html" title="2822-3個重要的心態設定（MindSet）：工作與生活的技術 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html"><span class="name">2822-3個重要的心態設定（MindSet）：工作與生活的技術 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html</span><span class="size">18118</span><span class="date">8/26/2022 3:28:22 PM</span></a></li>
+<li><a href="/public/afu/%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93/2836-%E5%86%8D%E8%A9%A6%E4%B8%80%E6%AC%A1%EF%BC%8C%E4%B8%8D%E8%A6%81%E6%94%BE%E6%A3%84%EF%BC%9A%E9%81%A0%E7%AB%AF%E9%8C%84%E9%9F%B3%E9%9B%BB%E5%8F%B0%E6%8E%A1%E8%A8%AA%20-%20%E7%8E%8B%E6%B0%B8%E7%A6%8F-%E7%A6%8F%E5%93%A5%E7%9A%84%E9%83%A8%E8%90%BD%E6%A0%BC%20%7C%20%E7%B0%A1%E5%A0%B1%E6%8A%80%E5%B7%A7%E6%8E%A8%E8%96%A6%E3%80%81%E5%85%A7%E9%83%A8%E8%AC%9B%E5%B8%AB%E6%8E%A8%E8%96%A6%E3%80%81%E9%A0%82%E5%B0%96%E4%BC%81%E6%A5%AD%E5%9F%B9%E8%A8%93%E6%95%99%E7%B7%B4.html" class="icon icon icon-html icon-text-html" title="2836-再試一次，不要放棄：遠端錄音電台採訪 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html"><span class="name">2836-再試一次，不要放棄：遠端錄音電台採訪 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html</span><span class="size">13499</span><span class="date">8/26/2022 3:28:21 PM</span></a></li>
+<li><a href="/public/afu/%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93/2991-%E3%80%8C%E7%8F%BE%E5%9C%A8%E7%9A%84%E6%88%91%E3%80%8D%E7%B5%A6%E3%80%8C%E5%B9%B4%E8%BC%95%E7%9A%84%E6%88%91%E3%80%8D%E7%9A%843%E5%80%8B%E5%BB%BA%E8%AD%B0%20-%20%E7%8E%8B%E6%B0%B8%E7%A6%8F-%E7%A6%8F%E5%93%A5%E7%9A%84%E9%83%A8%E8%90%BD%E6%A0%BC%20%7C%20%E7%B0%A1%E5%A0%B1%E6%8A%80%E5%B7%A7%E6%8E%A8%E8%96%A6%E3%80%81%E5%85%A7%E9%83%A8%E8%AC%9B%E5%B8%AB%E6%8E%A8%E8%96%A6%E3%80%81%E9%A0%82%E5%B0%96%E4%BC%81%E6%A5%AD%E5%9F%B9%E8%A8%93%E6%95%99%E7%B7%B4.html" class="icon icon icon-html icon-text-html" title="2991-「現在的我」給「年輕的我」的3個建議 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html"><span class="name">2991-「現在的我」給「年輕的我」的3個建議 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html</span><span class="size">16149</span><span class="date">8/26/2022 3:28:13 PM</span></a></li>
+<li><a href="/public/afu/%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93/2999-%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93%EF%BC%9A%E7%82%BA%E5%AE%B6%E4%BA%BA%E5%92%8C%E5%A5%BD%E5%8F%8B%E7%85%AE%E4%B8%80%E6%A1%8C%E5%A5%BD%E8%8F%9C%20-%20%E7%8E%8B%E6%B0%B8%E7%A6%8F-%E7%A6%8F%E5%93%A5%E7%9A%84%E9%83%A8%E8%90%BD%E6%A0%BC%20%7C%20%E7%B0%A1%E5%A0%B1%E6%8A%80%E5%B7%A7%E6%8E%A8%E8%96%A6%E3%80%81%E5%85%A7%E9%83%A8%E8%AC%9B%E5%B8%AB%E6%8E%A8%E8%96%A6%E3%80%81%E9%A0%82%E5%B0%96%E4%BC%81%E6%A5%AD%E5%9F%B9%E8%A8%93%E6%95%99%E7%B7%B4.html" class="icon icon icon-html icon-text-html" title="2999-工作與生活的技術：為家人和好友煮一桌好菜 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html"><span class="name">2999-工作與生活的技術：為家人和好友煮一桌好菜 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html</span><span class="size">11359</span><span class="date">8/26/2022 3:28:12 PM</span></a></li>
+<li><a href="/public/afu/%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93/3003-%E4%BD%A0%E4%B8%8D%E6%98%AF%E8%AE%80%E6%9B%B8%E7%9A%84%E6%96%99%EF%BC%9F%E9%82%A3%E5%B0%B1%E5%9B%9E%E6%A0%A1%E4%BF%AE%E5%80%8B%E5%AD%B8%E4%BD%8D%E5%86%8D%E5%AD%B8%E7%BF%92%20-%20%E7%8E%8B%E6%B0%B8%E7%A6%8F-%E7%A6%8F%E5%93%A5%E7%9A%84%E9%83%A8%E8%90%BD%E6%A0%BC%20%7C%20%E7%B0%A1%E5%A0%B1%E6%8A%80%E5%B7%A7%E6%8E%A8%E8%96%A6%E3%80%81%E5%85%A7%E9%83%A8%E8%AC%9B%E5%B8%AB%E6%8E%A8%E8%96%A6%E3%80%81%E9%A0%82%E5%B0%96%E4%BC%81%E6%A5%AD%E5%9F%B9%E8%A8%93%E6%95%99%E7%B7%B4.html" class="icon icon icon-html icon-text-html" title="3003-你不是讀書的料？那就回校修個學位再學習 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html"><span class="name">3003-你不是讀書的料？那就回校修個學位再學習 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html</span><span class="size">19862</span><span class="date">8/26/2022 3:28:11 PM</span></a></li>
+<li><a href="/public/afu/%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93/3006-%E8%90%83%E5%8F%96%E7%B2%BE%E5%BD%A9%E7%B0%A1%E5%A0%B1%E7%9A%845%E5%80%8B%E6%B3%95%E5%89%87%EF%BC%9A%E8%AB%872020%20%E6%86%B2%E7%A6%8F%E5%B9%B4%E6%9C%83%E6%BC%94%E8%AC%9B%20-%20%E7%8E%8B%E6%B0%B8%E7%A6%8F-%E7%A6%8F%E5%93%A5%E7%9A%84%E9%83%A8%E8%90%BD%E6%A0%BC%20%7C%20%E7%B0%A1%E5%A0%B1%E6%8A%80%E5%B7%A7%E6%8E%A8%E8%96%A6%E3%80%81%E5%85%A7%E9%83%A8%E8%AC%9B%E5%B8%AB%E6%8E%A8%E8%96%A6%E3%80%81%E9%A0%82%E5%B0%96%E4%BC%81%E6%A5%AD%E5%9F%B9%E8%A8%93%E6%95%99%E7%B7%B4.html" class="icon icon icon-html icon-text-html" title="3006-萃取精彩簡報的5個法則：談2020 憲福年會演講 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html"><span class="name">3006-萃取精彩簡報的5個法則：談2020 憲福年會演講 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html</span><span class="size">22204</span><span class="date">8/26/2022 3:28:10 PM</span></a></li>
+<li><a href="/public/afu/%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93/3015-%E5%BE%9E%E3%80%8C%E7%94%9F%E6%99%82%E9%96%93%E3%80%8D%E5%88%B0%E3%80%8C%E7%94%9F%E7%94%A2%E5%87%BA%E3%80%8D%20-%20%E7%8E%8B%E6%B0%B8%E7%A6%8F-%E7%A6%8F%E5%93%A5%E7%9A%84%E9%83%A8%E8%90%BD%E6%A0%BC%20%7C%20%E7%B0%A1%E5%A0%B1%E6%8A%80%E5%B7%A7%E6%8E%A8%E8%96%A6%E3%80%81%E5%85%A7%E9%83%A8%E8%AC%9B%E5%B8%AB%E6%8E%A8%E8%96%A6%E3%80%81%E9%A0%82%E5%B0%96%E4%BC%81%E6%A5%AD%E5%9F%B9%E8%A8%93%E6%95%99%E7%B7%B4.html" class="icon icon icon-html icon-text-html" title="3015-從「生時間」到「生產出」 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html"><span class="name">3015-從「生時間」到「生產出」 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html</span><span class="size">17964</span><span class="date">8/26/2022 3:28:09 PM</span></a></li>
+<li><a href="/public/afu/%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93/3032-%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93%EF%BC%8D%E5%BB%B6%E4%BC%B8%E8%9E%A2%E5%B9%95%20iPad%20%E7%AF%87%20-%20%E7%8E%8B%E6%B0%B8%E7%A6%8F-%E7%A6%8F%E5%93%A5%E7%9A%84%E9%83%A8%E8%90%BD%E6%A0%BC%20%7C%20%E7%B0%A1%E5%A0%B1%E6%8A%80%E5%B7%A7%E6%8E%A8%E8%96%A6%E3%80%81%E5%85%A7%E9%83%A8%E8%AC%9B%E5%B8%AB%E6%8E%A8%E8%96%A6%E3%80%81%E9%A0%82%E5%B0%96%E4%BC%81%E6%A5%AD%E5%9F%B9%E8%A8%93%E6%95%99%E7%B7%B4.html" class="icon icon icon-html icon-text-html" title="3032-工作與生活的技術－延伸螢幕 iPad 篇 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html"><span class="name">3032-工作與生活的技術－延伸螢幕 iPad 篇 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html</span><span class="size">12889</span><span class="date">8/26/2022 3:28:06 PM</span></a></li>
+<li><a href="/public/afu/%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93/3036-%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93%EF%BC%9A%E5%A4%9A%E4%B8%80%E9%A1%86%E8%9E%A2%E5%B9%95%EF%BC%8C%E5%A4%9A%E4%B8%80%E5%80%8D%E6%95%88%E7%8E%87%20-%20%E7%8E%8B%E6%B0%B8%E7%A6%8F-%E7%A6%8F%E5%93%A5%E7%9A%84%E9%83%A8%E8%90%BD%E6%A0%BC%20%7C%20%E7%B0%A1%E5%A0%B1%E6%8A%80%E5%B7%A7%E6%8E%A8%E8%96%A6%E3%80%81%E5%85%A7%E9%83%A8%E8%AC%9B%E5%B8%AB%E6%8E%A8%E8%96%A6%E3%80%81%E9%A0%82%E5%B0%96%E4%BC%81%E6%A5%AD%E5%9F%B9%E8%A8%93%E6%95%99%E7%B7%B4.html" class="icon icon icon-html icon-text-html" title="3036-工作與生活的技術：多一顆螢幕，多一倍效率 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html"><span class="name">3036-工作與生活的技術：多一顆螢幕，多一倍效率 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html</span><span class="size">16902</span><span class="date">8/26/2022 3:28:05 PM</span></a></li>
+<li><a href="/public/afu/%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93/3042-%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93%EF%BC%9AKill%20you%20time%20killer%20-%20%E9%9B%BB%E8%A6%96%20-%20%E7%8E%8B%E6%B0%B8%E7%A6%8F-%E7%A6%8F%E5%93%A5%E7%9A%84%E9%83%A8%E8%90%BD%E6%A0%BC%20%7C%20%E7%B0%A1%E5%A0%B1%E6%8A%80%E5%B7%A7%E6%8E%A8%E8%96%A6%E3%80%81%E5%85%A7%E9%83%A8%E8%AC%9B%E5%B8%AB%E6%8E%A8%E8%96%A6%E3%80%81%E9%A0%82%E5%B0%96%E4%BC%81%E6%A5%AD%E5%9F%B9%E8%A8%93%E6%95%99%E7%B7%B4.html" class="icon icon icon-html icon-text-html" title="3042-工作與生活的技術：Kill you time killer - 電視 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html"><span class="name">3042-工作與生活的技術：Kill you time killer - 電視 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html</span><span class="size">10132</span><span class="date">8/26/2022 3:28:05 PM</span></a></li>
+<li><a href="/public/afu/%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93/3045-%E6%89%93%E9%80%A0%E4%B8%80%E5%80%8B%E5%BF%83%E7%9B%AE%E4%B8%AD%E7%9A%84%E5%AE%B6%EF%BC%886%EF%BC%89%EF%BC%8D%E5%B7%A5%E7%A8%8B%E5%95%8F%E9%A1%8C%E8%88%87%E8%99%95%E7%90%86%20-%20%E7%8E%8B%E6%B0%B8%E7%A6%8F-%E7%A6%8F%E5%93%A5%E7%9A%84%E9%83%A8%E8%90%BD%E6%A0%BC%20%7C%20%E7%B0%A1%E5%A0%B1%E6%8A%80%E5%B7%A7%E6%8E%A8%E8%96%A6%E3%80%81%E5%85%A7%E9%83%A8%E8%AC%9B%E5%B8%AB%E6%8E%A8%E8%96%A6%E3%80%81%E9%A0%82%E5%B0%96%E4%BC%81%E6%A5%AD%E5%9F%B9%E8%A8%93%E6%95%99%E7%B7%B4.html" class="icon icon icon-html icon-text-html" title="3045-打造一個心目中的家（6）－工程問題與處理 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html"><span class="name">3045-打造一個心目中的家（6）－工程問題與處理 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html</span><span class="size">27315</span><span class="date">8/26/2022 3:28:04 PM</span></a></li>
+<li><a href="/public/afu/%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93/3055-%E6%89%93%E9%80%A0%E4%B8%80%E5%80%8B%E5%BF%83%E7%9B%AE%E4%B8%AD%E7%9A%84%E5%AE%B6%EF%BC%885%EF%BC%89%EF%BC%9A%E9%81%87%E8%A6%8B%E8%81%B7%E4%BA%BA%20-%20%E7%8E%8B%E6%B0%B8%E7%A6%8F-%E7%A6%8F%E5%93%A5%E7%9A%84%E9%83%A8%E8%90%BD%E6%A0%BC%20%7C%20%E7%B0%A1%E5%A0%B1%E6%8A%80%E5%B7%A7%E6%8E%A8%E8%96%A6%E3%80%81%E5%85%A7%E9%83%A8%E8%AC%9B%E5%B8%AB%E6%8E%A8%E8%96%A6%E3%80%81%E9%A0%82%E5%B0%96%E4%BC%81%E6%A5%AD%E5%9F%B9%E8%A8%93%E6%95%99%E7%B7%B4.html" class="icon icon icon-html icon-text-html" title="3055-打造一個心目中的家（5）：遇見職人 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html"><span class="name">3055-打造一個心目中的家（5）：遇見職人 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html</span><span class="size">18820</span><span class="date">8/26/2022 3:28:03 PM</span></a></li>
+<li><a href="/public/afu/%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93/3062-%E6%89%93%E9%80%A0%E4%B8%80%E5%80%8B%E5%BF%83%E7%9B%AE%E4%B8%AD%E7%9A%84%E5%AE%B6%EF%BC%884%EF%BC%89%EF%BC%8D%E5%B7%A5%E7%A8%8B%E9%96%8B%E5%A7%8B%E3%80%81%E6%8C%91%E6%88%B0%E9%96%8B%E5%A7%8B%20-%20%E7%8E%8B%E6%B0%B8%E7%A6%8F-%E7%A6%8F%E5%93%A5%E7%9A%84%E9%83%A8%E8%90%BD%E6%A0%BC%20%7C%20%E7%B0%A1%E5%A0%B1%E6%8A%80%E5%B7%A7%E6%8E%A8%E8%96%A6%E3%80%81%E5%85%A7%E9%83%A8%E8%AC%9B%E5%B8%AB%E6%8E%A8%E8%96%A6%E3%80%81%E9%A0%82%E5%B0%96%E4%BC%81%E6%A5%AD%E5%9F%B9%E8%A8%93%E6%95%99%E7%B7%B4.html" class="icon icon icon-html icon-text-html" title="3062-打造一個心目中的家（4）－工程開始、挑戰開始 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html"><span class="name">3062-打造一個心目中的家（4）－工程開始、挑戰開始 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html</span><span class="size">6866</span><span class="date">8/26/2022 3:28:02 PM</span></a></li>
+<li><a href="/public/afu/%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93/3066-%E6%89%93%E9%80%A0%E4%B8%80%E5%80%8B%E5%BF%83%E7%9B%AE%E4%B8%AD%E7%9A%84%E5%AE%B6%EF%BC%883%EF%BC%89%EF%BC%8D%E5%AE%A4%E4%BA%BA%E8%A8%AD%E8%A8%88%E5%B8%AB%E8%81%B7%E4%BA%BA%EF%BC%9A%E5%90%88%E9%A2%A8%E8%92%BC%E9%A3%9B%20-%20%E7%8E%8B%E6%B0%B8%E7%A6%8F-%E7%A6%8F%E5%93%A5%E7%9A%84%E9%83%A8%E8%90%BD%E6%A0%BC%20%7C%20%E7%B0%A1%E5%A0%B1%E6%8A%80%E5%B7%A7%E6%8E%A8%E8%96%A6%E3%80%81%E5%85%A7%E9%83%A8%E8%AC%9B%E5%B8%AB%E6%8E%A8%E8%96%A6%E3%80%81%E9%A0%82%E5%B0%96%E4%BC%81%E6%A5%AD%E5%9F%B9%E8%A8%93%E6%95%99%E7%B7%B4.html" class="icon icon icon-html icon-text-html" title="3066-打造一個心目中的家（3）－室人設計師職人：合風蒼飛 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html"><span class="name">3066-打造一個心目中的家（3）－室人設計師職人：合風蒼飛 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html</span><span class="size">23104</span><span class="date">8/26/2022 3:28:01 PM</span></a></li>
+<li><a href="/public/afu/%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93/3072-%E6%89%93%E9%80%A0%E4%B8%80%E5%80%8B%E5%BF%83%E7%9B%AE%E4%B8%AD%E7%9A%84%E5%AE%B6%EF%BC%882%EF%BC%89%EF%BC%9A%E5%BF%83%E7%9B%AE%E4%B8%AD%E7%9A%84%E8%A8%AD%E8%A8%88%E5%B8%AB%20-%20%E7%8E%8B%E6%B0%B8%E7%A6%8F-%E7%A6%8F%E5%93%A5%E7%9A%84%E9%83%A8%E8%90%BD%E6%A0%BC%20%7C%20%E7%B0%A1%E5%A0%B1%E6%8A%80%E5%B7%A7%E6%8E%A8%E8%96%A6%E3%80%81%E5%85%A7%E9%83%A8%E8%AC%9B%E5%B8%AB%E6%8E%A8%E8%96%A6%E3%80%81%E9%A0%82%E5%B0%96%E4%BC%81%E6%A5%AD%E5%9F%B9%E8%A8%93%E6%95%99%E7%B7%B4.html" class="icon icon icon-html icon-text-html" title="3072-打造一個心目中的家（2）：心目中的設計師 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html"><span class="name">3072-打造一個心目中的家（2）：心目中的設計師 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html</span><span class="size">15153</span><span class="date">8/26/2022 3:28:00 PM</span></a></li>
+<li><a href="/public/afu/%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93/3078-%E6%89%93%E9%80%A0%E4%B8%80%E5%80%8B%E5%BF%83%E7%9B%AE%E4%B8%AD%E7%9A%84%E5%AE%B6%EF%BC%880%EF%BC%89%EF%BC%8D%E5%89%8D%E8%A8%80%20-%20%E7%8E%8B%E6%B0%B8%E7%A6%8F-%E7%A6%8F%E5%93%A5%E7%9A%84%E9%83%A8%E8%90%BD%E6%A0%BC%20%7C%20%E7%B0%A1%E5%A0%B1%E6%8A%80%E5%B7%A7%E6%8E%A8%E8%96%A6%E3%80%81%E5%85%A7%E9%83%A8%E8%AC%9B%E5%B8%AB%E6%8E%A8%E8%96%A6%E3%80%81%E9%A0%82%E5%B0%96%E4%BC%81%E6%A5%AD%E5%9F%B9%E8%A8%93%E6%95%99%E7%B7%B4.html" class="icon icon icon-html icon-text-html" title="3078-打造一個心目中的家（0）－前言 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html"><span class="name">3078-打造一個心目中的家（0）－前言 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html</span><span class="size">10409</span><span class="date">8/26/2022 3:27:59 PM</span></a></li>
+<li><a href="/public/afu/%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93/3083-%E6%89%93%E9%80%A0%E4%B8%80%E5%80%8B%E5%BF%83%E7%9B%AE%E4%B8%AD%E7%9A%84%E5%AE%B6%EF%BC%881%EF%BC%89%EF%BC%8D%E6%96%B0%E5%B1%8B%E9%82%84%E6%98%AF%E4%B8%AD%E5%8F%A4%E5%B1%8B%20-%20%E7%8E%8B%E6%B0%B8%E7%A6%8F-%E7%A6%8F%E5%93%A5%E7%9A%84%E9%83%A8%E8%90%BD%E6%A0%BC%20%7C%20%E7%B0%A1%E5%A0%B1%E6%8A%80%E5%B7%A7%E6%8E%A8%E8%96%A6%E3%80%81%E5%85%A7%E9%83%A8%E8%AC%9B%E5%B8%AB%E6%8E%A8%E8%96%A6%E3%80%81%E9%A0%82%E5%B0%96%E4%BC%81%E6%A5%AD%E5%9F%B9%E8%A8%93%E6%95%99%E7%B7%B4.html" class="icon icon icon-html icon-text-html" title="3083-打造一個心目中的家（1）－新屋還是中古屋 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html"><span class="name">3083-打造一個心目中的家（1）－新屋還是中古屋 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html</span><span class="size">15222</span><span class="date">8/26/2022 3:27:58 PM</span></a></li>
+<li><a href="/public/afu/%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93/3095-%E6%87%B6%E4%BA%BA%E6%AA%94%E6%A1%88%E6%95%B4%E7%90%86%E6%B3%95%201%EF%BC%8D%E6%90%9C%E5%B0%8B%20-%20%E7%8E%8B%E6%B0%B8%E7%A6%8F-%E7%A6%8F%E5%93%A5%E7%9A%84%E9%83%A8%E8%90%BD%E6%A0%BC%20%7C%20%E7%B0%A1%E5%A0%B1%E6%8A%80%E5%B7%A7%E6%8E%A8%E8%96%A6%E3%80%81%E5%85%A7%E9%83%A8%E8%AC%9B%E5%B8%AB%E6%8E%A8%E8%96%A6%E3%80%81%E9%A0%82%E5%B0%96%E4%BC%81%E6%A5%AD%E5%9F%B9%E8%A8%93%E6%95%99%E7%B7%B4.html" class="icon icon icon-html icon-text-html" title="3095-懶人檔案整理法 1－搜尋 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html"><span class="name">3095-懶人檔案整理法 1－搜尋 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html</span><span class="size">8596</span><span class="date">8/26/2022 3:27:56 PM</span></a></li>
+<li><a href="/public/afu/%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93/3098-%E6%87%B6%E4%BA%BA%E6%AA%94%E6%A1%88%E6%95%B4%E7%90%86%E6%B3%95%202%EF%BC%8D%E5%9C%96%E7%89%87%E6%90%9C%E5%B0%8B%20-%20%E7%8E%8B%E6%B0%B8%E7%A6%8F-%E7%A6%8F%E5%93%A5%E7%9A%84%E9%83%A8%E8%90%BD%E6%A0%BC%20%7C%20%E7%B0%A1%E5%A0%B1%E6%8A%80%E5%B7%A7%E6%8E%A8%E8%96%A6%E3%80%81%E5%85%A7%E9%83%A8%E8%AC%9B%E5%B8%AB%E6%8E%A8%E8%96%A6%E3%80%81%E9%A0%82%E5%B0%96%E4%BC%81%E6%A5%AD%E5%9F%B9%E8%A8%93%E6%95%99%E7%B7%B4.html" class="icon icon icon-html icon-text-html" title="3098-懶人檔案整理法 2－圖片搜尋 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html"><span class="name">3098-懶人檔案整理法 2－圖片搜尋 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html</span><span class="size">16181</span><span class="date">8/26/2022 3:27:56 PM</span></a></li>
+<li><a href="/public/afu/%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93/3103-%E3%80%8C%E5%96%84%E6%84%9F%E3%80%8D%E7%9A%84%E7%BE%8E%E5%A5%BD%E7%8B%80%E6%85%8B%20-%20%E7%8E%8B%E6%B0%B8%E7%A6%8F-%E7%A6%8F%E5%93%A5%E7%9A%84%E9%83%A8%E8%90%BD%E6%A0%BC%20%7C%20%E7%B0%A1%E5%A0%B1%E6%8A%80%E5%B7%A7%E6%8E%A8%E8%96%A6%E3%80%81%E5%85%A7%E9%83%A8%E8%AC%9B%E5%B8%AB%E6%8E%A8%E8%96%A6%E3%80%81%E9%A0%82%E5%B0%96%E4%BC%81%E6%A5%AD%E5%9F%B9%E8%A8%93%E6%95%99%E7%B7%B4.html" class="icon icon icon-html icon-text-html" title="3103-「善感」的美好狀態 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html"><span class="name">3103-「善感」的美好狀態 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html</span><span class="size">6871</span><span class="date">8/26/2022 3:27:55 PM</span></a></li>
+<li><a href="/public/afu/%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93/3106-%E6%AF%8F%E5%A4%A9%E6%9C%80%E6%A3%92%E7%9A%84%E4%B8%89%E4%BB%B6%E4%BA%8B%20-%20%E7%8E%8B%E6%B0%B8%E7%A6%8F-%E7%A6%8F%E5%93%A5%E7%9A%84%E9%83%A8%E8%90%BD%E6%A0%BC%20%7C%20%E7%B0%A1%E5%A0%B1%E6%8A%80%E5%B7%A7%E6%8E%A8%E8%96%A6%E3%80%81%E5%85%A7%E9%83%A8%E8%AC%9B%E5%B8%AB%E6%8E%A8%E8%96%A6%E3%80%81%E9%A0%82%E5%B0%96%E4%BC%81%E6%A5%AD%E5%9F%B9%E8%A8%93%E6%95%99%E7%B7%B4.html" class="icon icon icon-html icon-text-html" title="3106-每天最棒的三件事 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html"><span class="name">3106-每天最棒的三件事 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html</span><span class="size">19311</span><span class="date">8/26/2022 3:23:35 PM</span></a></li>
+<li><a href="/public/afu/%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93/3109-%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93%EF%BC%9A%E6%9C%89%E6%95%88%E4%BC%91%E6%81%AF%E7%9A%84%E6%8A%80%E5%B7%A7%20-%20%E7%8E%8B%E6%B0%B8%E7%A6%8F-%E7%A6%8F%E5%93%A5%E7%9A%84%E9%83%A8%E8%90%BD%E6%A0%BC%20%7C%20%E7%B0%A1%E5%A0%B1%E6%8A%80%E5%B7%A7%E6%8E%A8%E8%96%A6%E3%80%81%E5%85%A7%E9%83%A8%E8%AC%9B%E5%B8%AB%E6%8E%A8%E8%96%A6%E3%80%81%E9%A0%82%E5%B0%96%E4%BC%81%E6%A5%AD%E5%9F%B9%E8%A8%93%E6%95%99%E7%B7%B4.html" class="icon icon icon-html icon-text-html" title="3109-工作與生活的技術：有效休息的技巧 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html"><span class="name">3109-工作與生活的技術：有效休息的技巧 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html</span><span class="size">11150</span><span class="date">8/26/2022 3:27:54 PM</span></a></li>
+<li><a href="/public/afu/%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93/3111-%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93%EF%BC%9A%E6%A5%AD%E9%A4%98%E8%88%88%E8%B6%A3%E3%80%81%E5%B0%88%E6%A5%AD%E8%BF%BD%E6%B1%82%20-%20%E7%8E%8B%E6%B0%B8%E7%A6%8F-%E7%A6%8F%E5%93%A5%E7%9A%84%E9%83%A8%E8%90%BD%E6%A0%BC%20%7C%20%E7%B0%A1%E5%A0%B1%E6%8A%80%E5%B7%A7%E6%8E%A8%E8%96%A6%E3%80%81%E5%85%A7%E9%83%A8%E8%AC%9B%E5%B8%AB%E6%8E%A8%E8%96%A6%E3%80%81%E9%A0%82%E5%B0%96%E4%BC%81%E6%A5%AD%E5%9F%B9%E8%A8%93%E6%95%99%E7%B7%B4.html" class="icon icon icon-html icon-text-html" title="3111-工作與生活的技術：業餘興趣、專業追求 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html"><span class="name">3111-工作與生活的技術：業餘興趣、專業追求 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html</span><span class="size">9402</span><span class="date">8/26/2022 3:27:53 PM</span></a></li>
+<li><a href="/public/afu/%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93/3114-%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93%EF%BC%9A%E5%AF%AB%E4%B8%8B%E4%BD%A0%E7%9A%84%E5%B7%A5%E4%BD%9C%EF%BC%88%E5%89%8D%E7%AF%87%EF%BC%89%20-%20%E7%8E%8B%E6%B0%B8%E7%A6%8F-%E7%A6%8F%E5%93%A5%E7%9A%84%E9%83%A8%E8%90%BD%E6%A0%BC%20%7C%20%E7%B0%A1%E5%A0%B1%E6%8A%80%E5%B7%A7%E6%8E%A8%E8%96%A6%E3%80%81%E5%85%A7%E9%83%A8%E8%AC%9B%E5%B8%AB%E6%8E%A8%E8%96%A6%E3%80%81%E9%A0%82%E5%B0%96%E4%BC%81%E6%A5%AD%E5%9F%B9%E8%A8%93%E6%95%99%E7%B7%B4.html" class="icon icon icon-html icon-text-html" title="3114-工作與生活的技術：寫下你的工作（前篇） - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html"><span class="name">3114-工作與生活的技術：寫下你的工作（前篇） - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html</span><span class="size">8560</span><span class="date">8/26/2022 3:27:52 PM</span></a></li>
+<li><a href="/public/afu/%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93/3117-%E8%A8%88%E6%99%82%EF%BC%8C%E6%98%AF%E7%82%BA%E4%BA%86%E5%BF%98%E8%A8%98%E6%99%82%E9%96%93%EF%BC%9A%E8%AB%87%E8%A8%88%E6%99%82%E5%99%A8%E5%B7%A5%E4%BD%9C%E8%A1%93%20-%20%E7%8E%8B%E6%B0%B8%E7%A6%8F-%E7%A6%8F%E5%93%A5%E7%9A%84%E9%83%A8%E8%90%BD%E6%A0%BC%20%7C%20%E7%B0%A1%E5%A0%B1%E6%8A%80%E5%B7%A7%E6%8E%A8%E8%96%A6%E3%80%81%E5%85%A7%E9%83%A8%E8%AC%9B%E5%B8%AB%E6%8E%A8%E8%96%A6%E3%80%81%E9%A0%82%E5%B0%96%E4%BC%81%E6%A5%AD%E5%9F%B9%E8%A8%93%E6%95%99%E7%B7%B4.html" class="icon icon icon-html icon-text-html" title="3117-計時，是為了忘記時間：談計時器工作術 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html"><span class="name">3117-計時，是為了忘記時間：談計時器工作術 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html</span><span class="size">7582</span><span class="date">8/26/2022 3:27:51 PM</span></a></li>
+<li><a href="/public/afu/%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93/3120-%E7%84%A1%E7%97%9B%E6%97%A9%E8%B5%B7%E7%9A%84%E7%B3%BB%E7%B5%B1%E5%8C%96%E6%96%B9%E6%B3%95%20-%20%E7%8E%8B%E6%B0%B8%E7%A6%8F-%E7%A6%8F%E5%93%A5%E7%9A%84%E9%83%A8%E8%90%BD%E6%A0%BC%20%7C%20%E7%B0%A1%E5%A0%B1%E6%8A%80%E5%B7%A7%E6%8E%A8%E8%96%A6%E3%80%81%E5%85%A7%E9%83%A8%E8%AC%9B%E5%B8%AB%E6%8E%A8%E8%96%A6%E3%80%81%E9%A0%82%E5%B0%96%E4%BC%81%E6%A5%AD%E5%9F%B9%E8%A8%93%E6%95%99%E7%B7%B4.html" class="icon icon icon-html icon-text-html" title="3120-無痛早起的系統化方法 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html"><span class="name">3120-無痛早起的系統化方法 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html</span><span class="size">17702</span><span class="date">8/26/2022 3:27:50 PM</span></a></li>
+<li><a href="/public/afu/%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93/3126-%E6%97%A9%E8%B5%B7%EF%BC%8C%E6%94%B9%E8%AE%8A%E4%BD%A0%E7%9A%84%E7%94%9F%E6%B4%BB%20-%20%E7%8E%8B%E6%B0%B8%E7%A6%8F-%E7%A6%8F%E5%93%A5%E7%9A%84%E9%83%A8%E8%90%BD%E6%A0%BC%20%7C%20%E7%B0%A1%E5%A0%B1%E6%8A%80%E5%B7%A7%E6%8E%A8%E8%96%A6%E3%80%81%E5%85%A7%E9%83%A8%E8%AC%9B%E5%B8%AB%E6%8E%A8%E8%96%A6%E3%80%81%E9%A0%82%E5%B0%96%E4%BC%81%E6%A5%AD%E5%9F%B9%E8%A8%93%E6%95%99%E7%B7%B4.html" class="icon icon icon-html icon-text-html" title="3126-早起，改變你的生活 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html"><span class="name">3126-早起，改變你的生活 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html</span><span class="size">13643</span><span class="date">8/26/2022 3:27:49 PM</span></a></li>
+<li><a href="/public/afu/%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93/3177-%E7%AE%A1%E7%90%86%E7%9A%84%E4%B8%8D%E6%98%AF%E6%99%82%E9%96%93%EF%BC%8C%E8%80%8C%E6%98%AF%E4%BD%A0%E7%9A%84%E7%94%9F%E7%94%A2%E5%8A%9B%20-%20%E7%8E%8B%E6%B0%B8%E7%A6%8F-%E7%A6%8F%E5%93%A5%E7%9A%84%E9%83%A8%E8%90%BD%E6%A0%BC%20%7C%20%E7%B0%A1%E5%A0%B1%E6%8A%80%E5%B7%A7%E6%8E%A8%E8%96%A6%E3%80%81%E5%85%A7%E9%83%A8%E8%AC%9B%E5%B8%AB%E6%8E%A8%E8%96%A6%E3%80%81%E9%A0%82%E5%B0%96%E4%BC%81%E6%A5%AD%E5%9F%B9%E8%A8%93%E6%95%99%E7%B7%B4.html" class="icon icon icon-html icon-text-html" title="3177-管理的不是時間，而是你的生產力 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html"><span class="name">3177-管理的不是時間，而是你的生產力 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html</span><span class="size">14608</span><span class="date">8/26/2022 3:27:42 PM</span></a></li>
+<li><a href="/public/afu/%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93/3189-%E7%B5%A640%E6%AD%B2%E7%9A%84%E4%BD%A0%EF%BC%9A%E5%AD%B8%E7%BF%92%EF%BC%8C%E6%B0%B8%E9%81%A0%E4%B8%8D%E5%AB%8C%E6%99%9A%20-%20%E7%8E%8B%E6%B0%B8%E7%A6%8F-%E7%A6%8F%E5%93%A5%E7%9A%84%E9%83%A8%E8%90%BD%E6%A0%BC%20%7C%20%E7%B0%A1%E5%A0%B1%E6%8A%80%E5%B7%A7%E6%8E%A8%E8%96%A6%E3%80%81%E5%85%A7%E9%83%A8%E8%AC%9B%E5%B8%AB%E6%8E%A8%E8%96%A6%E3%80%81%E9%A0%82%E5%B0%96%E4%BC%81%E6%A5%AD%E5%9F%B9%E8%A8%93%E6%95%99%E7%B7%B4.html" class="icon icon icon-html icon-text-html" title="3189-給40歲的你：學習，永遠不嫌晚 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html"><span class="name">3189-給40歲的你：學習，永遠不嫌晚 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html</span><span class="size">11676</span><span class="date">8/26/2022 3:27:38 PM</span></a></li>
+<li><a href="/public/afu/%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93/3283-%E5%88%9D%E6%8C%91%E6%88%B0%EF%BC%8D%E9%90%B5%E4%BA%BA%E4%B8%89%E9%A0%85%E4%B9%8B%E8%B7%AF%EF%BC%881%EF%BC%89%20-%20%E7%8E%8B%E6%B0%B8%E7%A6%8F-%E7%A6%8F%E5%93%A5%E7%9A%84%E9%83%A8%E8%90%BD%E6%A0%BC%20%7C%20%E7%B0%A1%E5%A0%B1%E6%8A%80%E5%B7%A7%E6%8E%A8%E8%96%A6%E3%80%81%E5%85%A7%E9%83%A8%E8%AC%9B%E5%B8%AB%E6%8E%A8%E8%96%A6%E3%80%81%E9%A0%82%E5%B0%96%E4%BC%81%E6%A5%AD%E5%9F%B9%E8%A8%93%E6%95%99%E7%B7%B4.html" class="icon icon icon-html icon-text-html" title="3283-初挑戰－鐵人三項之路（1） - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html"><span class="name">3283-初挑戰－鐵人三項之路（1） - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html</span><span class="size">18745</span><span class="date">8/26/2022 3:27:30 PM</span></a></li>
+<li><a href="/public/afu/%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93/3294-%E9%9D%A2%E5%B0%8D%E6%81%90%E6%87%BC%EF%BC%8C%E6%89%8D%E8%83%BD%E4%B8%8D%E5%86%8D%E6%81%90%E6%87%BC%20-%20%E7%8E%8B%E6%B0%B8%E7%A6%8F-%E7%A6%8F%E5%93%A5%E7%9A%84%E9%83%A8%E8%90%BD%E6%A0%BC%20%7C%20%E7%B0%A1%E5%A0%B1%E6%8A%80%E5%B7%A7%E6%8E%A8%E8%96%A6%E3%80%81%E5%85%A7%E9%83%A8%E8%AC%9B%E5%B8%AB%E6%8E%A8%E8%96%A6%E3%80%81%E9%A0%82%E5%B0%96%E4%BC%81%E6%A5%AD%E5%9F%B9%E8%A8%93%E6%95%99%E7%B7%B4.html" class="icon icon icon-html icon-text-html" title="3294-面對恐懼，才能不再恐懼 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html"><span class="name">3294-面對恐懼，才能不再恐懼 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html</span><span class="size">16114</span><span class="date">8/26/2022 3:27:28 PM</span></a></li>
+<li><a href="/public/afu/%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93/3297-%E6%9C%89%E6%96%B9%E6%B3%95%E7%9A%84%E5%88%BB%E6%84%8F%E7%B7%B4%E7%BF%92%EF%BC%9A%E5%85%88%E5%88%86%E9%96%8B%EF%BC%8C%E5%86%8D%E5%90%88%E8%B5%B7%E4%BE%86%20-%20%E7%8E%8B%E6%B0%B8%E7%A6%8F-%E7%A6%8F%E5%93%A5%E7%9A%84%E9%83%A8%E8%90%BD%E6%A0%BC%20%7C%20%E7%B0%A1%E5%A0%B1%E6%8A%80%E5%B7%A7%E6%8E%A8%E8%96%A6%E3%80%81%E5%85%A7%E9%83%A8%E8%AC%9B%E5%B8%AB%E6%8E%A8%E8%96%A6%E3%80%81%E9%A0%82%E5%B0%96%E4%BC%81%E6%A5%AD%E5%9F%B9%E8%A8%93%E6%95%99%E7%B7%B4.html" class="icon icon icon-html icon-text-html" title="3297-有方法的刻意練習：先分開，再合起來 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html"><span class="name">3297-有方法的刻意練習：先分開，再合起來 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html</span><span class="size">6704</span><span class="date">8/26/2022 3:27:27 PM</span></a></li>
+<li><a href="/public/afu/%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93/3381-%E7%B0%A1%E5%96%AE%E9%81%8E%E7%94%9F%E6%B4%BB%EF%BC%8C%E7%9C%9F%E5%BF%83%E4%BA%A4%E6%9C%8B%E5%8F%8B%20-%20%E7%8E%8B%E6%B0%B8%E7%A6%8F-%E7%A6%8F%E5%93%A5%E7%9A%84%E9%83%A8%E8%90%BD%E6%A0%BC%20%7C%20%E7%B0%A1%E5%A0%B1%E6%8A%80%E5%B7%A7%E6%8E%A8%E8%96%A6%E3%80%81%E5%85%A7%E9%83%A8%E8%AC%9B%E5%B8%AB%E6%8E%A8%E8%96%A6%E3%80%81%E9%A0%82%E5%B0%96%E4%BC%81%E6%A5%AD%E5%9F%B9%E8%A8%93%E6%95%99%E7%B7%B4.html" class="icon icon icon-html icon-text-html" title="3381-簡單過生活，真心交朋友 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html"><span class="name">3381-簡單過生活，真心交朋友 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html</span><span class="size">9644</span><span class="date">8/26/2022 3:27:08 PM</span></a></li>
+<li><a href="/public/afu/%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93/3394-%E7%A6%8F%E5%93%A5%E6%96%99%E7%90%86%E6%95%99%E5%AE%A4%EF%BC%8DSous%20vide%20%E4%BD%8E%E6%BA%AB%2012%E5%B0%8F%E6%99%82%E7%89%9B%E5%B0%8F%E6%8E%92%20-%20%E7%8E%8B%E6%B0%B8%E7%A6%8F-%E7%A6%8F%E5%93%A5%E7%9A%84%E9%83%A8%E8%90%BD%E6%A0%BC%20%7C%20%E7%B0%A1%E5%A0%B1%E6%8A%80%E5%B7%A7%E6%8E%A8%E8%96%A6%E3%80%81%E5%85%A7%E9%83%A8%E8%AC%9B%E5%B8%AB%E6%8E%A8%E8%96%A6%E3%80%81%E9%A0%82%E5%B0%96%E4%BC%81%E6%A5%AD%E5%9F%B9%E8%A8%93%E6%95%99%E7%B7%B4.html" class="icon icon icon-html icon-text-html" title="3394-福哥料理教室－Sous vide 低溫 12小時牛小排 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html"><span class="name">3394-福哥料理教室－Sous vide 低溫 12小時牛小排 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html</span><span class="size">11262</span><span class="date">8/26/2022 3:27:05 PM</span></a></li>
+<li><a href="/public/afu/%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93/3467-%E8%81%9A%E7%84%A6%E3%80%81%E6%94%BE%E6%A3%84%E8%88%87%E9%81%B8%E6%93%87%EF%BC%88%E4%B8%8A%EF%BC%89%20-%20%E7%8E%8B%E6%B0%B8%E7%A6%8F-%E7%A6%8F%E5%93%A5%E7%9A%84%E9%83%A8%E8%90%BD%E6%A0%BC%20%7C%20%E7%B0%A1%E5%A0%B1%E6%8A%80%E5%B7%A7%E6%8E%A8%E8%96%A6%E3%80%81%E5%85%A7%E9%83%A8%E8%AC%9B%E5%B8%AB%E6%8E%A8%E8%96%A6%E3%80%81%E9%A0%82%E5%B0%96%E4%BC%81%E6%A5%AD%E5%9F%B9%E8%A8%93%E6%95%99%E7%B7%B4.html" class="icon icon icon-html icon-text-html" title="3467-聚焦、放棄與選擇（上） - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html"><span class="name">3467-聚焦、放棄與選擇（上） - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html</span><span class="size">12078</span><span class="date">8/26/2022 3:26:50 PM</span></a></li>
+<li><a href="/public/afu/%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93/3470-%E8%81%9A%E7%84%A6%E3%80%81%E6%94%BE%E6%A3%84%E3%80%81%E8%88%87%E9%81%B8%E6%93%87%EF%BC%88%E4%B8%8B%EF%BC%89%20-%20%E7%8E%8B%E6%B0%B8%E7%A6%8F-%E7%A6%8F%E5%93%A5%E7%9A%84%E9%83%A8%E8%90%BD%E6%A0%BC%20%7C%20%E7%B0%A1%E5%A0%B1%E6%8A%80%E5%B7%A7%E6%8E%A8%E8%96%A6%E3%80%81%E5%85%A7%E9%83%A8%E8%AC%9B%E5%B8%AB%E6%8E%A8%E8%96%A6%E3%80%81%E9%A0%82%E5%B0%96%E4%BC%81%E6%A5%AD%E5%9F%B9%E8%A8%93%E6%95%99%E7%B7%B4.html" class="icon icon icon-html icon-text-html" title="3470-聚焦、放棄、與選擇（下） - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html"><span class="name">3470-聚焦、放棄、與選擇（下） - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html</span><span class="size">9056</span><span class="date">8/26/2022 3:26:49 PM</span></a></li>
+<li><a href="/public/afu/%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93/3472-%E5%AF%AB%E5%87%BA%E5%BD%B1%E9%9F%BF%E5%8A%9B%E7%9A%84%E7%B3%BB%E7%B5%B1%E5%8C%96%E4%BD%9C%E6%B3%95%20-%20%E7%8E%8B%E6%B0%B8%E7%A6%8F-%E7%A6%8F%E5%93%A5%E7%9A%84%E9%83%A8%E8%90%BD%E6%A0%BC%20%7C%20%E7%B0%A1%E5%A0%B1%E6%8A%80%E5%B7%A7%E6%8E%A8%E8%96%A6%E3%80%81%E5%85%A7%E9%83%A8%E8%AC%9B%E5%B8%AB%E6%8E%A8%E8%96%A6%E3%80%81%E9%A0%82%E5%B0%96%E4%BC%81%E6%A5%AD%E5%9F%B9%E8%A8%93%E6%95%99%E7%B7%B4.html" class="icon icon icon-html icon-text-html" title="3472-寫出影響力的系統化作法 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html"><span class="name">3472-寫出影響力的系統化作法 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html</span><span class="size">10116</span><span class="date">8/26/2022 3:26:48 PM</span></a></li>
+<li><a href="/public/afu/%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93/3577-%E9%81%B8%E6%93%87%E9%9B%99%E4%BA%BA%E6%8E%A8%E8%BB%8A%E7%9A%847%E5%80%8B%E8%80%83%E9%87%8F%20-%20%E7%8E%8B%E6%B0%B8%E7%A6%8F-%E7%A6%8F%E5%93%A5%E7%9A%84%E9%83%A8%E8%90%BD%E6%A0%BC%20%7C%20%E7%B0%A1%E5%A0%B1%E6%8A%80%E5%B7%A7%E6%8E%A8%E8%96%A6%E3%80%81%E5%85%A7%E9%83%A8%E8%AC%9B%E5%B8%AB%E6%8E%A8%E8%96%A6%E3%80%81%E9%A0%82%E5%B0%96%E4%BC%81%E6%A5%AD%E5%9F%B9%E8%A8%93%E6%95%99%E7%B7%B4.html" class="icon icon icon-html icon-text-html" title="3577-選擇雙人推車的7個考量 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html"><span class="name">3577-選擇雙人推車的7個考量 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html</span><span class="size">4503</span><span class="date">8/26/2022 3:26:18 PM</span></a></li>
+<li><a href="/public/afu/%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93/3583-%E5%AE%85%E7%88%B8%E5%BF%83%E5%BE%97%EF%BC%9A%E5%B0%88%E6%B3%A8%E5%BF%AB%E9%80%9F%E7%9A%84%E5%AD%B8%E5%A5%BD%E4%B8%80%E4%BB%B6%E4%BA%8B%20-%20%E7%8E%8B%E6%B0%B8%E7%A6%8F-%E7%A6%8F%E5%93%A5%E7%9A%84%E9%83%A8%E8%90%BD%E6%A0%BC%20%7C%20%E7%B0%A1%E5%A0%B1%E6%8A%80%E5%B7%A7%E6%8E%A8%E8%96%A6%E3%80%81%E5%85%A7%E9%83%A8%E8%AC%9B%E5%B8%AB%E6%8E%A8%E8%96%A6%E3%80%81%E9%A0%82%E5%B0%96%E4%BC%81%E6%A5%AD%E5%9F%B9%E8%A8%93%E6%95%99%E7%B7%B4.html" class="icon icon icon-html icon-text-html" title="3583-宅爸心得：專注快速的學好一件事 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html"><span class="name">3583-宅爸心得：專注快速的學好一件事 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html</span><span class="size">7960</span><span class="date">8/26/2022 3:26:17 PM</span></a></li>
+<li><a href="/public/afu/%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93/3710-Espresso%20Life%20-%20%E7%8E%8B%E6%B0%B8%E7%A6%8F-%E7%A6%8F%E5%93%A5%E7%9A%84%E9%83%A8%E8%90%BD%E6%A0%BC%20%7C%20%E7%B0%A1%E5%A0%B1%E6%8A%80%E5%B7%A7%E6%8E%A8%E8%96%A6%E3%80%81%E5%85%A7%E9%83%A8%E8%AC%9B%E5%B8%AB%E6%8E%A8%E8%96%A6%E3%80%81%E9%A0%82%E5%B0%96%E4%BC%81%E6%A5%AD%E5%9F%B9%E8%A8%93%E6%95%99%E7%B7%B4.html" class="icon icon icon-html icon-text-html" title="3710-Espresso Life - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html"><span class="name">3710-Espresso Life - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html</span><span class="size">3550</span><span class="date">8/26/2022 3:25:31 PM</span></a></li>
+<li><a href="/public/afu/%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93/4039-The%20Art%20of%20Impossible%20x%20%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93%EF%BC%88%E4%B8%8B%E9%9B%86%EF%BC%89%20%EF%BC%9A%E6%8A%80%E8%A1%93%E8%88%87%E8%97%9D%E8%A1%93%E7%9A%84%E4%BA%A4%E9%9B%86%EF%BC%8D%E5%BF%83%E5%BE%97%E5%88%86%E4%BA%AB%20-%20%E7%8E%8B%E6%B0%B8%E7%A6%8F-%E7%A6%8F%E5%93%A5%E7%9A%84%E9%83%A8%E8%90%BD%E6%A0%BC%20%7C%20%E7%B0%A1%E5%A0%B1%E6%8A%80%E5%B7%A7%E6%8E%A8%E8%96%A6%E3%80%81%E5%85%A7%E9%83%A8%E8%AC%9B%E5%B8%AB%E6%8E%A8%E8%96%A6%E3%80%81%E9%A0%82%E5%B0%96%E4%BC%81%E6%A5%AD%E5%9F%B9%E8%A8%93%E6%95%99%E7%B7%B4.html" class="icon icon icon-html icon-text-html" title="4039-The Art of Impossible x 工作與生活的技術（下集） ：技術與藝術的交集－心得分享 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html"><span class="name">4039-The Art of Impossible x 工作與生活的技術（下集） ：技術與藝術的交集－心得分享 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html</span><span class="size">12912</span><span class="date">8/26/2022 3:24:41 PM</span></a></li>
+<li><a href="/public/afu/%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93/4050-The%20Art%20of%20Impossible%20x%20%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93%EF%BC%88%E4%B8%8A%E9%9B%86%EF%BC%89%20%EF%BC%9A%E4%B8%8D%E5%8F%AF%E8%83%BD%E7%9A%84%E8%97%9D%E8%A1%93%EF%BC%8D%E5%85%A8%E6%9B%B8%E7%B0%A1%E4%BB%8B%20-%20%E7%8E%8B%E6%B0%B8%E7%A6%8F-%E7%A6%8F%E5%93%A5%E7%9A%84%E9%83%A8%E8%90%BD%E6%A0%BC%20%7C%20%E7%B0%A1%E5%A0%B1%E6%8A%80%E5%B7%A7%E6%8E%A8%E8%96%A6%E3%80%81%E5%85%A7%E9%83%A8%E8%AC%9B%E5%B8%AB%E6%8E%A8%E8%96%A6%E3%80%81%E9%A0%82%E5%B0%96%E4%BC%81%E6%A5%AD%E5%9F%B9%E8%A8%93%E6%95%99%E7%B7%B4.html" class="icon icon icon-html icon-text-html" title="4050-The Art of Impossible x 工作與生活的技術（上集） ：不可能的藝術－全書簡介 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html"><span class="name">4050-The Art of Impossible x 工作與生活的技術（上集） ：不可能的藝術－全書簡介 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html</span><span class="size">6958</span><span class="date">8/26/2022 3:24:12 PM</span></a></li>
+<li><a href="/public/afu/%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93/4213-%E8%B7%9F%E5%AD%A9%E5%AD%90%E4%B8%80%E8%B5%B7%E5%9C%A8%E5%AE%B6%E9%98%B2%E7%96%AB%E7%9A%843%E5%80%8B%E6%AD%A5%E9%A9%9F%20-%20%E7%8E%8B%E6%B0%B8%E7%A6%8F-%E7%A6%8F%E5%93%A5%E7%9A%84%E9%83%A8%E8%90%BD%E6%A0%BC%20%7C%20%E7%B0%A1%E5%A0%B1%E6%8A%80%E5%B7%A7%E6%8E%A8%E8%96%A6%E3%80%81%E5%85%A7%E9%83%A8%E8%AC%9B%E5%B8%AB%E6%8E%A8%E8%96%A6%E3%80%81%E9%A0%82%E5%B0%96%E4%BC%81%E6%A5%AD%E5%9F%B9%E8%A8%93%E6%95%99%E7%B7%B4.html" class="icon icon icon-html icon-text-html" title="4213-跟孩子一起在家防疫的3個步驟 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html"><span class="name">4213-跟孩子一起在家防疫的3個步驟 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html</span><span class="size">11159</span><span class="date">8/26/2022 3:24:12 PM</span></a></li>
+<li><a href="/public/afu/%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93/4496-%E5%AF%AB%E4%B8%8B%E7%9B%AE%E6%A8%99%E7%9A%84%E5%8B%87%E6%B0%A3%EF%BC%9A10%20%E5%B9%B4%E4%B9%8B%E5%BE%8C%E7%9A%84%2050%20%E5%80%8B%E5%A4%A2%E6%83%B3%20-%20%E7%8E%8B%E6%B0%B8%E7%A6%8F-%E7%A6%8F%E5%93%A5%E7%9A%84%E9%83%A8%E8%90%BD%E6%A0%BC%20%7C%20%E7%B0%A1%E5%A0%B1%E6%8A%80%E5%B7%A7%E6%8E%A8%E8%96%A6%E3%80%81%E5%85%A7%E9%83%A8%E8%AC%9B%E5%B8%AB%E6%8E%A8%E8%96%A6%E3%80%81%E9%A0%82%E5%B0%96%E4%BC%81%E6%A5%AD%E5%9F%B9%E8%A8%93%E6%95%99%E7%B7%B4.html" class="icon icon icon-html icon-text-html" title="4496-寫下目標的勇氣：10 年之後的 50 個夢想 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html"><span class="name">4496-寫下目標的勇氣：10 年之後的 50 個夢想 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html</span><span class="size">4114</span><span class="date">8/26/2022 3:24:10 PM</span></a></li>
+<li><a href="/public/afu/%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93/4527-%E8%87%AA%E5%AD%B8%E6%A8%82%E5%99%A8%E7%9A%84%20App%20%E6%8E%A8%E8%96%A6%EF%BC%9A%E8%96%A9%E5%85%8B%E6%96%AF%E9%A2%A8%20%EF%BC%86%20%E9%8B%BC%E7%90%B4%20-%20%E7%8E%8B%E6%B0%B8%E7%A6%8F-%E7%A6%8F%E5%93%A5%E7%9A%84%E9%83%A8%E8%90%BD%E6%A0%BC%20%7C%20%E7%B0%A1%E5%A0%B1%E6%8A%80%E5%B7%A7%E6%8E%A8%E8%96%A6%E3%80%81%E5%85%A7%E9%83%A8%E8%AC%9B%E5%B8%AB%E6%8E%A8%E8%96%A6%E3%80%81%E9%A0%82%E5%B0%96%E4%BC%81%E6%A5%AD%E5%9F%B9%E8%A8%93%E6%95%99%E7%B7%B4.html" class="icon icon icon-html icon-text-html" title="4527-自學樂器的 App 推薦：薩克斯風 ＆ 鋼琴 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html"><span class="name">4527-自學樂器的 App 推薦：薩克斯風 ＆ 鋼琴 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html</span><span class="size">10891</span><span class="date">8/26/2022 3:24:09 PM</span></a></li>
+<li><a href="/public/afu/%E5%B7%A5%E4%BD%9C%E8%88%87%E7%94%9F%E6%B4%BB%E7%9A%84%E6%8A%80%E8%A1%93/4572-%E5%88%A5%E5%82%BB%E4%BA%86%EF%BC%8C%E4%B9%9F%E8%A8%B1%E4%BD%A0%E6%9B%B4%E9%9C%80%E8%A6%81%E7%9A%84%E6%98%AF%E3%80%8C%E5%89%B5%E6%96%B0%E3%80%8D%20-%20%E7%8E%8B%E6%B0%B8%E7%A6%8F-%E7%A6%8F%E5%93%A5%E7%9A%84%E9%83%A8%E8%90%BD%E6%A0%BC%20%7C%20%E7%B0%A1%E5%A0%B1%E6%8A%80%E5%B7%A7%E6%8E%A8%E8%96%A6%E3%80%81%E5%85%A7%E9%83%A8%E8%AC%9B%E5%B8%AB%E6%8E%A8%E8%96%A6%E3%80%81%E9%A0%82%E5%B0%96%E4%BC%81%E6%A5%AD%E5%9F%B9%E8%A8%93%E6%95%99%E7%B7%B4.html" class="icon icon icon-html icon-text-html" title="4572-別傻了，也許你更需要的是「創新」 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html"><span class="name">4572-別傻了，也許你更需要的是「創新」 - 王永福-福哥的部落格 | 簡報技巧推薦、內部講師推薦、頂尖企業培訓教練.html</span><span class="size">9889</span><span class="date">8/26/2022 3:24:15 PM</span></a></li>
+</ul>
+    </div>
+  </body>
+</html>
