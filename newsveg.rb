@@ -7,6 +7,9 @@ if !Dir.exist?("./public")
     Dir.mkdir("./public")
 end
 
+if !Dir.exist?("./public/newsveg")
+    Dir.mkdir("./public/newsveg")
+end
 
 toolong=[
     "#",
@@ -40,10 +43,10 @@ xml.xpath("//url/loc").each do |url|
         # categories
         categories = page.xpath("//div[contains(@class,'singlepost-tag-list')]/div/h2/a").each do |categorie|
             dirname = categorie.text.gsub("/", "+")
-            if !Dir.exist?("./public/#{dirname}") && dirname != ""
-                Dir.mkdir("./public/#{dirname}")
+            if !Dir.exist?("./public/newsveg/#{dirname}") && dirname != ""
+                Dir.mkdir("./public/newsveg/#{dirname}")
             end
-            File.write("./public/#{dirname}/#{pageNumber}-#{author}-#{title}.html", body)
+            File.write("./public/newsveg/#{dirname}/#{pageNumber}-#{author}-#{title}.html", body)
         end
     end 
 end

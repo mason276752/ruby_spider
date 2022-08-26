@@ -7,6 +7,10 @@ if !Dir.exist?("./public")
     Dir.mkdir("./public")
 end
 
+if !Dir.exist?("./public/afu")
+    Dir.mkdir("./public/afu")
+end
+
 
 toolong=[
     "（含文獻 Reference，原文標題：The Key Elements of Gamification in Corporate Training - The Delphi Method）",
@@ -36,10 +40,10 @@ xml.xpath("//url/loc").each do |url|
         # categories
         categories = page.xpath("//ul[@class='post-categories']/li").each do |categorie|
             dirname = categorie.text.gsub("/", "+")
-            if !Dir.exist?("./public/#{dirname}") && dirname != ""
-                Dir.mkdir("./public/#{dirname}")
+            if !Dir.exist?("./public/afu/#{dirname}") && dirname != ""
+                Dir.mkdir("./public/afu/#{dirname}")
             end
-            File.write("./public/#{dirname}/#{page_number}-#{title}.html", body)
+            File.write("./public/afu/#{dirname}/#{page_number}-#{title}.html", body)
         end
     end
 end
